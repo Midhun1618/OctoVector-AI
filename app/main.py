@@ -1,6 +1,7 @@
-from pipelines.ingestion_pipeline import process_pdf
+from fastapi import FastAPI
 
-chunks = process_pdf("sample.pdf")
+app = FastAPI()
 
-print(len(chunks))
-print(chunks[0])
+@app.get("/")
+def root():
+    return {"message": "OctoVector AI is running 🚀"}

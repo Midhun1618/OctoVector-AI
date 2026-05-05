@@ -6,3 +6,5 @@ rank-bm25
 numpy
 scikit-learn
 tqdm
+fastapi
+uvicorn
