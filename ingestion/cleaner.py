@@ -2,9 +2,8 @@ import re
 
 def clean_text(text: str) -> str:
     """
-    Basic text cleaning:
-    - remove extra spaces
-    - remove newlines
+    Basic cleaning:
+    - remove extra whitespace
     """
     text = re.sub(r"\s+", " ", text)
     return text.strip()

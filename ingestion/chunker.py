@@ -3,11 +3,11 @@ from typing import List, Dict
 def chunk_text(
     text: str,
     page_num: int,
-    chunk_size: int = 500,
-    overlap: int = 100
+    chunk_size: int = 150,
+    overlap: int = 30
 ) -> List[Dict]:
     """
-    Split text into overlapping chunks
+    Create overlapping chunks
     """
 
     words = text.split()

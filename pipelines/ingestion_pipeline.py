@@ -1,11 +1,10 @@
-import os
 from ingestion.parser import extract_text_from_pdf
 from ingestion.cleaner import clean_text
 from ingestion.chunker import chunk_text
 
 def process_pdf(file_path: str):
     """
-    Full ingestion pipeline:
+    Full ingestion:
     PDF → clean → chunk
     """
 
