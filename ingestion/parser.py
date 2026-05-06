@@ -1,18 +1,22 @@
-import fitz  # PyMuPDF
-from typing import List, Tuple
+from ingestion.chunker import chunk_text
 
-def extract_text_from_pdf(file_path: str) -> List[Tuple[int, str]]:
-    """
-    Extract text from PDF page by page.
+def extract_text_from_pdf(pdf_path):
+    import fitz  
 
-    Returns:
-        List of (page_number, text)
-    """
-    doc = fitz.open(file_path)
-    pages = []
+    doc = fitz.open(pdf_path)
 
-    for i, page in enumerate(doc):
-        text = page.get_text("text")
-        pages.append((i + 1, text))
+    all_chunks = []
 
-    return pages
+    for page_num, page in enumerate(doc, start=1):
+        text = page.get_text()
+
+        chunks = chunk_text(text)
+
+        for i, chunk in enumerate(chunks):
+            all_chunks.append({
+                "chunk_id": f"{page_num}_{i}",
+                "text": chunk,
+                "page": page_num
+            })
+
+    return all_chunks

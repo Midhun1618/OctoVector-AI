@@ -1,34 +1,43 @@
+import re
 from typing import List, Dict
 
-def chunk_text(
-    text: str,
-    page_num: int,
-    chunk_size: int = 150,
-    overlap: int = 30
-) -> List[Dict]:
+
+def split_into_sentences(text: str) -> List[str]:
+    # Simple sentence splitter
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    return [s.strip() for s in sentences if s.strip()]
+
+
+def chunk_text(text: str, chunk_size: int = 250, overlap: int = 50) -> List[str]:
     """
-    Create overlapping chunks
+    Sentence-aware chunking with overlap
+    chunk_size and overlap are approximate token counts (we approximate via words)
     """
 
-    words = text.split()
+    sentences = split_into_sentences(text)
+
     chunks = []
+    current_chunk = []
+    current_length = 0
 
-    start = 0
-    chunk_id = 0
+    for sentence in sentences:
+        words = sentence.split()
+        length = len(words)
 
-    while start < len(words):
-        end = start + chunk_size
-        chunk_words = words[start:end]
+        # If adding this sentence exceeds chunk size → finalize chunk
+        if current_length + length > chunk_size:
+            chunks.append(" ".join(current_chunk))
 
-        chunk_str = " ".join(chunk_words)
+            # Add overlap
+            overlap_words = " ".join(current_chunk).split()[-overlap:]
+            current_chunk = [" ".join(overlap_words)]
 
-        chunks.append({
-            "chunk_id": f"{page_num}_{chunk_id}",
-            "text": chunk_str,
-            "page": page_num
-        })
+            current_length = len(overlap_words)
 
-        start += chunk_size - overlap
-        chunk_id += 1
+        current_chunk.append(sentence)
+        current_length += length
+
+    if current_chunk:
+        chunks.append(" ".join(current_chunk))
 
     return chunks
