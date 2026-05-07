@@ -1,20 +1,3 @@
-# ============================================================
-# OctoVector AI — Generation Pipeline
-# ============================================================
-# Changes:
-#  1. CORRECTNESS FIX: build_prompt now returns (prompt, sources)
-#     tuple — this module now unpacks both and returns sources
-#     alongside the answer so the caller can display citations.
-#  2. Added token-count estimate in the log so you can monitor
-#     prompt size without a tokeniser dependency.
-#  3. generate_response returns a dict instead of a raw string:
-#       {
-#           "answer"  : str,
-#           "sources" : List[Dict],   # chunks actually used
-#       }
-#     This breaks the old interface intentionally — it makes the
-#     system transparent and testable.
-
 from __future__ import annotations
 
 import logging
@@ -30,6 +13,7 @@ def generate_response(
     query: str,
     retrieved_chunks: List[Dict],
 ) -> Dict:
+    print("🟢Generation PL : Starting to create response")
     """
     Full generation pipeline: chunks → prompt → LLM → answer.
 
@@ -40,10 +24,8 @@ def generate_response(
         "sources" : List[Dict] — the chunks used to build the prompt.
     }
     """
-    # CHANGE: unpack (prompt, sources) tuple from build_prompt
     prompt, sources = build_prompt(query=query, chunks=retrieved_chunks)
 
-    # Rough token estimate (1 token ≈ 4 chars) — helpful for debugging
     est_tokens = len(prompt) // 4
     logger.info("[Generation] Prompt sent to LLM — estimated tokens: %d", est_tokens)
 

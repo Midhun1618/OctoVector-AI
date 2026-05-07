@@ -33,6 +33,7 @@ class CrossEncoderReranker:
         chunks: List[Dict],
         top_k: int = RERANK_TOP_K,
     ) -> List[Dict]:
+        print("🟢CROSS-ENCODER : Scoring and Reranking chunk")
         """
         Score and rerank *chunks* for *query*, return top-k.
 

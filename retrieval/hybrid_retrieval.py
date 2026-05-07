@@ -10,6 +10,7 @@ class HybridRetriever:
         self.sparse = SparseRetriever(chunks)
 
     def retrieve(self, query: str, k: int = 20):
+        print("🟢Hybrid R : Initialized HYBRID")
         dense_results = self.dense.retrieve(query, k=DENSE_TOP_K)
         sparse_results = self.sparse.retrieve(query, k=SPARSE_TOP_K)
 

@@ -13,6 +13,7 @@ def extract_text_from_pdf(
     pdf_path: str,
     page_range: Optional[Tuple[int, int]] = None,
 ) -> List[Dict]:
+    print("🟢Parser : Extracting text from pdf")
     """
     Parse *pdf_path* and return a list of chunk dicts.
 

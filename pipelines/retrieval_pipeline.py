@@ -17,6 +17,7 @@ _reranker: Optional[CrossEncoderReranker] = None
 
 
 def _get_reranker() -> CrossEncoderReranker:
+    print("🟢Retrieval PL : Ranker on board")
     global _reranker
     if _reranker is None:
         _reranker = CrossEncoderReranker()
@@ -30,6 +31,7 @@ def retrieve_chunks(
     top_k: int = FINAL_TOP_K,
     index_manager: Optional[IndexManager] = None,
 ) -> List[Dict]:
+    print("🟢Retrieval PL : Fetching the chunks")
     """
     Full retrieval pipeline: embeddings → hybrid retrieval → reranking.
 

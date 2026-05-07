@@ -17,6 +17,7 @@ _MIN_CHUNK_WORDS = 10
 
 
 def split_into_sentences(text: str) -> List[str]:
+    print("🟢Chunker : spliting sentence")
     """
     Split *text* into sentences using punctuation boundaries,
     while respecting common abbreviations.
@@ -38,6 +39,7 @@ def chunk_text(
     chunk_size: int = CHUNK_SIZE,
     overlap: int = CHUNK_OVERLAP,
 ) -> List[str]:
+    print("🟢Chunker : chunking text")
     """
     Sentence-aware chunking with word-count-based overlap.
 

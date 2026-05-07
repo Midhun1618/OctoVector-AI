@@ -2,6 +2,7 @@ import re
 
 
 def analyze_query(query: str):
+    print("🟢QUERY : Analysing")
     """
     Analyze query characteristics
     """

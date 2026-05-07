@@ -11,13 +11,13 @@ class SparseRetriever:
         self.bm25 = BM25Okapi(self.corpus)
 
     def retrieve(self, query: str, k: int = 5):
+        print("🟢Sparse R : Filtering Top K chunks with BM25")
         """
         Return top-k chunks based on BM25
         """
         tokenized_query = query.split()
         scores = self.bm25.get_scores(tokenized_query)
 
-        # rank indices
         ranked_indices = sorted(
             range(len(scores)),
             key=lambda i: scores[i],

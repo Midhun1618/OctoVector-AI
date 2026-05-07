@@ -7,5 +7,6 @@ class DenseRetriever:
         self.index_manager = index_manager
 
     def retrieve(self, query: str, k: int = 5):
+        print("🟢Dense R : Retrieving")
         query_vec = embed_query(query)
         return self.index_manager.search(query_vec, k=k)

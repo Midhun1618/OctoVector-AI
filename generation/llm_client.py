@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import time
 import logging
+import os
 from typing import Optional
 
 import requests
@@ -20,6 +21,7 @@ def _build_url() -> str:
 
 
 def _build_payload(prompt: str) -> dict:
+    print(os.getenv("GEMINI_API_KEY"))
     return {
         "contents": [
             {"parts": [{"text": prompt}]}
@@ -39,6 +41,7 @@ def _parse_response(data: dict) -> str:
 
 
 def generate_answer(prompt: str, api_key: Optional[str] = None) -> str:
+    print("🟢LLM : Starting to Generate Response")
     """
     Send *prompt* to Gemini and return the generated text.
 

@@ -5,6 +5,7 @@ import unicodedata
 
 
 def clean_text(text: str) -> str:
+    print("🟢Cleaner :cleaning text")
     """
     Clean raw PDF-extracted text.
 

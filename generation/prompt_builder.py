@@ -6,6 +6,7 @@ _CHARS_PER_CHUNK = 4_000
 
 
 def _format_chunk(chunk: Dict, max_chars: int = _CHARS_PER_CHUNK) -> str:
+    print("🟢PROMPT : Formatting chunks")
     text = chunk["text"][:max_chars]
     page = chunk.get("page", "?")
     cid  = chunk.get("chunk_id", "?")
@@ -17,6 +18,7 @@ def build_prompt(
     chunks: List[Dict],
     max_chars_per_chunk: int = _CHARS_PER_CHUNK,
 ) -> Tuple[str, List[Dict]]:
+    print("🟢PROMPT : Designing and Building prompt")
     """
     Assemble a RAG prompt from the query and retrieved chunks.
 

@@ -10,6 +10,7 @@ def reciprocal_rank_fusion(
     sparse_results: List[Dict],
     k: int = RRF_K,
 ) -> List[Dict]:
+    print("🟢RRF : Merging and Reranking Dense & Sparse result")
     """
     Merge and re-rank *dense_results* and *sparse_results* using
     Reciprocal Rank Fusion (RRF).

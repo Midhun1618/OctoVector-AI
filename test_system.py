@@ -5,7 +5,6 @@ import sys
 import time
 import os
 
-# ── Logging setup ─────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
@@ -25,14 +24,14 @@ def banner(title: str) -> None:
 
 
 def main() -> None:
-    # ── Config ────────────────────────────────────────────────
+
     pdf_path = (
         sys.argv[1]
         if len(sys.argv) > 1
         else os.getenv("OCTOVECTOR_PDF", "data/raw_pdfs/octovector_rag_testdoc.pdf")
     )
 
-    # ── STEP 1: Ingestion ─────────────────────────────────────
+    # Ingestion 
     banner("STEP 1 — PDF INGESTION")
     t0 = time.time()
     chunks = process_pdf(pdf_path)
@@ -43,14 +42,14 @@ def main() -> None:
         print("[ERROR] No chunks extracted. Check the PDF path and content.")
         sys.exit(1)
 
-    # ── STEP 2: Embedding ─────────────────────────────────────
+    # Embedding 
     banner("STEP 2 — EMBEDDING")
     t0 = time.time()
     embeddings = embed_chunks(chunks)
     print(f"  Embedding shape: {embeddings.shape}")
     print(f"  Time           : {time.time() - t0:.2f}s")
 
-    # ── STEP 3: Query ─────────────────────────────────────────
+    # Query 
     banner("STEP 3 — QUERY INPUT")
     try:
         query = input("\n  Enter your question:\n  > ").strip()
@@ -62,7 +61,7 @@ def main() -> None:
         print("[ERROR] Empty query.")
         sys.exit(1)
 
-    # ── STEP 4: Retrieval ─────────────────────────────────────
+    # Retrieval 
     banner("STEP 4 — RETRIEVAL + RERANKING")
     t0 = time.time()
     retrieved = retrieve_chunks(
@@ -81,18 +80,16 @@ def main() -> None:
         if "rerank_score" in chunk: print(f"  Rerank Score : {chunk['rerank_score']:.4f}")
         print(f"  Text preview : {chunk['text'][:300]}…")
 
-    # ── STEP 5: Generation ────────────────────────────────────
+    # Generation
     banner("STEP 5 — GENERATION")
     t0 = time.time()
 
-    # CHANGE: generate_response now returns {"answer": ..., "sources": ...}
     result = generate_response(query=query, retrieved_chunks=retrieved)
     answer  = result["answer"]
     sources = result["sources"]
 
     print(f"  Time: {time.time() - t0:.2f}s")
 
-    # ── Final answer ──────────────────────────────────────────
     banner("FINAL ANSWER")
     print(f"\n{answer}")
 

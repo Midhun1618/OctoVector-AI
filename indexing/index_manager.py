@@ -26,6 +26,7 @@ class IndexManager:
         chunks: List[Dict],
         embeddings: np.ndarray,
     ) -> None:
+        print("🟢Index Manager : Create FAISS index from embedding & chunks")
         """
         Build a FAISS index from *embeddings* and store *chunks*.
 
@@ -48,6 +49,7 @@ class IndexManager:
         query_vector: np.ndarray,
         k: int = 5,
     ) -> List[Dict]:
+        print("🟢Index Manager : Searching index upto K")
         """
         Search the index and return up to *k* matching chunk dicts,
         each annotated with a 'score' key (higher = more similar).
@@ -68,6 +70,7 @@ class IndexManager:
         return results
 
     def save(self, directory: str) -> None:
+        print("🟢Index Manager : saving index & chunk")
         """Persist index and chunks to *directory*."""
         os.makedirs(directory, exist_ok=True)
 
@@ -82,6 +85,7 @@ class IndexManager:
         logger.info("[IndexManager] Saved to %s", directory)
 
     def load(self, directory: str, dim: int) -> None:
+        print("🟢Index Manager : Loading chunks & index")
         """Load index and chunks previously saved with save()."""
         index_path  = os.path.join(directory, _INDEX_FILENAME)
         chunks_path = os.path.join(directory, _CHUNKS_FILENAME)

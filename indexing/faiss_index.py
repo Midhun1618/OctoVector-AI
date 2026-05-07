@@ -22,6 +22,7 @@ class FAISSIndex:
         logger.info("[FAISS] Initialised IndexFlatIP with dim=%d", dim)
 
     def add(self, embeddings: np.ndarray) -> None:
+        print("🟢FAISS : Fetch Vectors")
         """Add a batch of normalised float32 vectors."""
         if embeddings.ndim != 2 or embeddings.shape[1] != self.dim:
             raise ValueError(
@@ -34,6 +35,7 @@ class FAISSIndex:
     def search(
         self, query_vector: np.ndarray, k: int = 5
     ) -> Tuple[np.ndarray, np.ndarray]:
+        print("🟢FAISS : Get info of Top K nearest Neighbour")
         """
         Return (scores, indices) for the top-k nearest neighbours.
         Higher score = more similar (inner product).
@@ -52,6 +54,7 @@ class FAISSIndex:
         return scores[0], indices[0]
 
     def save(self, path: str) -> None:
+        print("🟢FAISS : Serealizing index")
         """Serialise the index to *path* (e.g. "index.faiss")."""
         os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
         faiss.write_index(self.index, path)
@@ -59,6 +62,7 @@ class FAISSIndex:
 
     @classmethod
     def load(cls, path: str, dim: int) -> "FAISSIndex":
+        print("🟢FAISS: Deserialize stored index")
         """Deserialise an index previously saved with save()."""
         if not os.path.exists(path):
             raise FileNotFoundError(f"FAISS index file not found: {path}")
