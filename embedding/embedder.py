@@ -2,7 +2,6 @@ from sentence_transformers import SentenceTransformer
 from typing import List, Dict
 import numpy as np
 
-# Load model once (global)
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 def embed_chunks(chunks: List[Dict]) -> np.ndarray:

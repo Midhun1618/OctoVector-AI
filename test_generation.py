@@ -9,6 +9,7 @@ from generation.llm_client import generate_answer
 # 1. Ingest
 chunks = process_pdf("sample.pdf")
 
+
 # 2. Embed
 embeddings = embed_chunks(chunks)
 

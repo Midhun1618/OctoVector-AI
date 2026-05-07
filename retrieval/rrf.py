@@ -18,7 +18,7 @@ def reciprocal_rank_fusion(dense_results, sparse_results, k=60):
         reverse=True
     )
 
-    # ✅ Attach RRF scor
+
     for item in ranked:
         item["rrf_score"] = scores[item["chunk_id"]]
         

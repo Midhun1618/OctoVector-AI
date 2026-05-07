@@ -1,43 +1,84 @@
+from __future__ import annotations
+
 import re
-from typing import List, Dict
+import logging
+from typing import List
+
+from utils.config import CHUNK_SIZE, CHUNK_OVERLAP
+
+logger = logging.getLogger(__name__)
+
+_ABBREV_PATTERN = re.compile(
+    r"\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|Fig|No|Vol|vs|etc|approx|e\.g|i\.e)\.",
+    re.IGNORECASE,
+)
+
+_MIN_CHUNK_WORDS = 10
 
 
 def split_into_sentences(text: str) -> List[str]:
-    # Simple sentence splitter
-    sentences = re.split(r'(?<=[.!?])\s+', text)
-    return [s.strip() for s in sentences if s.strip()]
+    """
+    Split *text* into sentences using punctuation boundaries,
+    while respecting common abbreviations.
+    """
+    masked = _ABBREV_PATTERN.sub(lambda m: m.group().replace(".", "<!DOT!>"), text)
+
+    parts = re.split(r"(?<=[.!?])\s+", masked)
+
+    sentences = [
+        p.replace("<!DOT!>", ".").strip()
+        for p in parts
+        if p.strip()
+    ]
+    return sentences
 
 
-def chunk_text(text: str, chunk_size: int = 250, overlap: int = 50) -> List[str]:
+def chunk_text(
+    text: str,
+    chunk_size: int = CHUNK_SIZE,
+    overlap: int = CHUNK_OVERLAP,
+) -> List[str]:
     """
-    Sentence-aware chunking with overlap
-    chunk_size and overlap are approximate token counts (we approximate via words)
+    Sentence-aware chunking with word-count-based overlap.
+
+    Parameters
+    ----------
+    text       : Raw page / document text.
+    chunk_size : Target size in words.
+    overlap    : Number of words carried forward from the previous chunk.
+
+    Returns
+    -------
+    List of non-empty chunk strings.
     """
+    text = text.strip()
+    if not text:
+        return []
 
     sentences = split_into_sentences(text)
 
-    chunks = []
-    current_chunk = []
-    current_length = 0
+    chunks: List[str] = []
+    current_words: List[str] = []
 
     for sentence in sentences:
-        words = sentence.split()
-        length = len(words)
+        s_words = sentence.split()
 
-        # If adding this sentence exceeds chunk size → finalize chunk
-        if current_length + length > chunk_size:
-            chunks.append(" ".join(current_chunk))
+        if len(current_words) + len(s_words) > chunk_size and current_words:
+            chunk_str = " ".join(current_words)
 
-            # Add overlap
-            overlap_words = " ".join(current_chunk).split()[-overlap:]
-            current_chunk = [" ".join(overlap_words)]
+            if len(current_words) >= _MIN_CHUNK_WORDS:
+                chunks.append(chunk_str)
 
-            current_length = len(overlap_words)
+            current_words = current_words[-overlap:] if overlap else []
 
-        current_chunk.append(sentence)
-        current_length += length
+        current_words.extend(s_words)
 
-    if current_chunk:
-        chunks.append(" ".join(current_chunk))
+    if current_words:
+        chunk_str = " ".join(current_words)
+        if len(current_words) >= _MIN_CHUNK_WORDS:
+            chunks.append(chunk_str)
+        elif chunks:
+            chunks[-1] = chunks[-1] + " " + chunk_str
 
+    logger.debug("[Chunker] Produced %d chunks from %d sentences", len(chunks), len(sentences))
     return chunks
