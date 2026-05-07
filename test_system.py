@@ -1,16 +1,3 @@
-# ============================================================
-# OctoVector AI — End-to-End System Test / CLI
-# ============================================================
-# Changes:
-#  1. Logging configured at the top — replaces scattered print()
-#     calls inside modules while keeping user-facing prints here.
-#  2. generate_response now returns a dict; answer and sources
-#     are unpacked and sources are displayed for transparency.
-#  3. PDF_PATH can be overridden via CLI argument or env var
-#     OCTOVECTOR_PDF for scripting convenience.
-#  4. Graceful handling of KeyboardInterrupt (Ctrl-C).
-#  5. Exit with non-zero code on unrecoverable errors.
-
 from __future__ import annotations
 
 import logging

@@ -1,36 +1,103 @@
+from __future__ import annotations
+
+import time
+import logging
+from typing import Optional
+
 import requests
-import os
 
-GEMINI_API_KEY = "AIzaSyBaXoQYjgtaAhIN6jSfvPTOhvnPYSgcam4"
+from utils.config import GEMINI_API_KEY, GEMINI_MODEL, GEMINI_BASE_URL
 
-URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
+logger = logging.getLogger(__name__)
+
+_RETRYABLE_CODES = {429, 500, 502, 503, 504}
+_MAX_RETRIES = 3
+_BACKOFF_BASE = 2.0
 
 
-def generate_answer(prompt: str) -> str:
+def _build_url() -> str:
+    return f"{GEMINI_BASE_URL}/{GEMINI_MODEL}:generateContent"
+
+
+def _build_payload(prompt: str) -> dict:
+    return {
+        "contents": [
+            {"parts": [{"text": prompt}]}
+        ],
+        "generationConfig": {
+            "temperature": 0.2,
+            "maxOutputTokens": 1024,
+        },
+    }
+
+
+def _parse_response(data: dict) -> str:
+    try:
+        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+    except (KeyError, IndexError) as exc:
+        raise RuntimeError(f"Unexpected Gemini response shape: {exc}\n{data}") from exc
+
+
+def generate_answer(prompt: str, api_key: Optional[str] = None) -> str:
+    """
+    Send *prompt* to Gemini and return the generated text.
+
+    Parameters
+    ----------
+    prompt  : The fully-built prompt string.
+    api_key : Override key (useful for tests). Falls back to config.
+
+    Returns
+    -------
+    The model's answer as a plain string.
+
+    Raises
+    ------
+    RuntimeError if all retries are exhausted or the response is malformed.
+    """
+    key = api_key or GEMINI_API_KEY
+    if not key:
+        raise RuntimeError(
+            "GEMINI_API_KEY is not set. "
+            "Export it as an environment variable before running."
+        )
+
     headers = {
         "Content-Type": "application/json",
-        "X-goog-api-key": GEMINI_API_KEY
+        "X-goog-api-key": key,
     }
+    payload = _build_payload(prompt)
+    url = _build_url()
 
-    payload = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": prompt}
-                ]
-            }
-        ]
-    }
+    for attempt in range(1, _MAX_RETRIES + 1):
+        try:
+            response = requests.post(
+                url,
+                headers=headers,
+                json=payload,
+                timeout=30,
+            )
+        except requests.exceptions.RequestException as exc:
+            logger.warning("[LLM] Network error on attempt %d: %s", attempt, exc)
+            if attempt == _MAX_RETRIES:
+                raise RuntimeError(f"LLM request failed after {_MAX_RETRIES} attempts: {exc}") from exc
+            time.sleep(_BACKOFF_BASE ** attempt)
+            continue
 
-    response = requests.post(URL, headers=headers, json=payload)
+        if response.status_code == 200:
+            return _parse_response(response.json())
 
-    if response.status_code != 200:
-        print("ERROR:", response.text)
-        return "LLM request failed"
+        if response.status_code in _RETRYABLE_CODES and attempt < _MAX_RETRIES:
+            wait = _BACKOFF_BASE ** attempt
+            logger.warning(
+                "[LLM] HTTP %d on attempt %d — retrying in %.1fs",
+                response.status_code, attempt, wait,
+            )
+            time.sleep(wait)
+            continue
 
-    data = response.json()
+        raise RuntimeError(
+            f"Gemini API returned HTTP {response.status_code}: {response.text}"
+        )
 
-    try:
-        return data["candidates"][0]["content"]["parts"][0]["text"]
-    except Exception:
-        return "Failed to parse response"
+    raise RuntimeError("LLM request exhausted all retries.")

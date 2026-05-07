@@ -1,19 +1,3 @@
-# ============================================================
-# OctoVector AI — PDF Parser
-# ============================================================
-# Changes:
-#  1. BUG FIX: cleaner.clean_text() was imported but never
-#     called. Text now goes through cleaning before chunking.
-#  2. Pages with no extractable text (scanned images) are
-#     logged and skipped rather than producing empty chunks.
-#  3. extract_text_from_pdf now accepts an optional page_range
-#     so large documents can be processed in sections.
-#  4. chunk_id is now a proper string key:
-#     f"p{page_num}_c{i}" — avoids confusion with
-#     integer arithmetic on "1_0" strings.
-#  5. Added page metadata: char_count is stored so downstream
-#     modules can filter trivially-short pages.
-
 from __future__ import annotations
 
 import logging
@@ -45,7 +29,7 @@ def extract_text_from_pdf(
                  E.g. (1, 10) processes pages 1–10 only.
     """
     try:
-        import fitz  # PyMuPDF
+        import fitz 
     except ImportError as exc:
         raise ImportError(
             "PyMuPDF is required: pip install pymupdf"
@@ -54,7 +38,6 @@ def extract_text_from_pdf(
     doc = fitz.open(pdf_path)
     total_pages = doc.page_count
 
-    # Determine page range
     start_page = 1
     end_page   = total_pages
     if page_range:
@@ -69,14 +52,13 @@ def extract_text_from_pdf(
     all_chunks: List[Dict] = []
 
     for page_num in range(start_page, end_page + 1):
-        page = doc[page_num - 1]  # fitz is 0-based
+        page = doc[page_num - 1]
         raw_text = page.get_text()
 
         if not raw_text.strip():
             logger.warning("[Parser] Page %d has no extractable text — skipping.", page_num)
             continue
 
-        # CHANGE: clean before chunking
         cleaned_text = clean_text(raw_text)
 
         if not cleaned_text:
@@ -87,7 +69,7 @@ def extract_text_from_pdf(
 
         for i, chunk in enumerate(chunks):
             all_chunks.append({
-                "chunk_id":   f"p{page_num}_c{i}",   # CHANGE: clearer ID format
+                "chunk_id":   f"p{page_num}_c{i}",
                 "text":       chunk,
                 "page":       page_num,
                 "char_count": len(chunk),

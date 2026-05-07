@@ -1,26 +1,49 @@
-def reciprocal_rank_fusion(dense_results, sparse_results, k=60):
-    scores = {}
+from __future__ import annotations
 
-    def add_scores(results):
+from typing import List, Dict
+
+from utils.config import RRF_K
+
+
+def reciprocal_rank_fusion(
+    dense_results: List[Dict],
+    sparse_results: List[Dict],
+    k: int = RRF_K,
+) -> List[Dict]:
+    """
+    Merge and re-rank *dense_results* and *sparse_results* using
+    Reciprocal Rank Fusion (RRF).
+
+    Each input item must have a "chunk_id" key.
+
+    Returns a list of chunk dicts sorted by descending rrf_score.
+    """
+    scores: dict[str, float] = {}
+
+    def _accumulate(results: List[Dict]) -> None:
         for rank, item in enumerate(results):
-            key = item["chunk_id"]
-            scores.setdefault(key, 0)
-            scores[key] += 1 / (k + rank + 1)
+            cid = item["chunk_id"]
+            scores[cid] = scores.get(cid, 0.0) + 1.0 / (k + rank + 1)
 
-    add_scores(dense_results)
-    add_scores(sparse_results)
+    _accumulate(dense_results)
+    _accumulate(sparse_results)
 
-    all_chunks = {c["chunk_id"]: c for c in dense_results + sparse_results}
+    all_chunks: dict[str, Dict] = {}
+    for item in sparse_results:
+        all_chunks[item["chunk_id"]] = item
+    for item in dense_results:          
+        all_chunks[item["chunk_id"]] = item
+
+    max_score = 1.0 / (k + 1) * 2
 
     ranked = sorted(
         all_chunks.values(),
         key=lambda x: scores[x["chunk_id"]],
-        reverse=True
+        reverse=True,
     )
 
-
     for item in ranked:
-        item["rrf_score"] = scores[item["chunk_id"]]
-        
+        raw = scores[item["chunk_id"]]
+        item["rrf_score"] = raw / max_score
 
     return ranked

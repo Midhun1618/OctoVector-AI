@@ -1,5 +1,3 @@
-# retrieval/query_analyzer.py
-
 import re
 
 

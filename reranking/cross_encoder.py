@@ -1,22 +1,3 @@
-# ============================================================
-# OctoVector AI — Cross-Encoder Reranker
-# ============================================================
-# Changes:
-#  1. Model loaded as lazy singleton (same pattern as embedder)
-#     to avoid reloading on every pipeline invocation.
-#  2. CORRECTNESS FIX: analyze_query was imported and called but
-#     its result was never actually improving ranking in a sound
-#     way — raw keyword-count boosts can easily overpower the
-#     cross-encoder signal for long queries. Boost is now scaled
-#     by query length so short precise queries aren't penalised.
-#  3. Numeric boost is now checked with word-boundary regex
-#     (r"\b42\b") to avoid "142" matching a query for "42".
-#  4. Batch prediction (cross_encoder.predict on all pairs at
-#     once) replaces the implicit loop — already the case, but
-#     now explicit with show_progress_bar for large corpora.
-#  5. Empty chunk list handled gracefully.
-#  6. Type hints added.
-
 from __future__ import annotations
 
 import re
@@ -44,7 +25,6 @@ def _get_model() -> CrossEncoder:
 class CrossEncoderReranker:
 
     def __init__(self) -> None:
-        # Trigger lazy load at construction time (warms up before first query)
         self.model = _get_model()
 
     def rerank(
@@ -85,15 +65,10 @@ class CrossEncoderReranker:
             text  = chunk["text"].lower()
             boost = 0.0
 
-            # ── Numeric boost ─────────────────────────────
-            # CHANGE: word-boundary match avoids "142" matching "42"
             for number in query_info["numbers"]:
                 if re.search(rf"\b{re.escape(number)}\b", text):
                     boost += 0.5
 
-            # ── Keyword boost (length-normalised) ─────────
-            # CHANGE: divide by query_len so a 20-keyword query
-            # can't drown out the cross-encoder signal.
             keyword_matches = sum(
                 1 for word in query_info["keywords"] if word in text
             )
