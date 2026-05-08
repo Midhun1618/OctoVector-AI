@@ -436,12 +436,13 @@ export default function App() {
         {/* Top bar */}
         <div className="topbar">
           <div className="brand">
-            <div className="logo-hex">
+            
+            <div className="brand-text">
+                <div className="logo-hex">
               <img src="/octovector_icon.png" alt="OctoVector"
                 onError={e => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '<span style="font-size:11px;color:#e8d8ff;font-family:monospace">OV</span>'; }}
               />
             </div>
-            <div className="brand-text">
               <div className="name">OctoVector</div>
               <div className="sub">Hybrid RAG · v2</div>
             </div>
