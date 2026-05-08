@@ -1,125 +1,122 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
 
-export default function App() {
-
-  const [file, setFile] = useState(null);
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [status, setStatus] = useState("");
-
-  const API = import.meta.env.VITE_API_URL;
-
-  const uploadPDF = async () => {
-
-    if (!file) {
-      alert("Please select a PDF.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-
-      setStatus("Uploading and processing PDF...");
-
-      const response = await axios.post(
-        `${API}/upload`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      setStatus(response.data.message);
-
-    } catch (err) {
-
-      setStatus("Upload failed.");
-
-    }
-  };
-
-  const askQuestion = async () => {
-
-    if (!question.trim()) return;
-
-    try {
-
-      setStatus("Generating answer...");
-
-      const response = await axios.post(
-        `${API}/query`,
-        {
-          question,
-        }
-      );
-
-      setAnswer(response.data.answer);
-
-      setStatus("");
-
-    } catch (err) {
-
-      setStatus("Error generating answer.");
-
-    }
-  };
+function App() {
+  const [count, setCount] = useState(0)
 
   return (
-    <div className="container">
-
-      <h1 className="title">
-        OctoVector AI
-      </h1>
-
-      <p className="subtitle">
-        Upload PDF and ask questions using RAG
-      </p>
-
-      <div className="chat-box">
-
-        <input
-          type="file"
-          accept=".pdf"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
-        <button onClick={uploadPDF}>
-          Upload PDF
-        </button>
-
-        <br /><br />
-
-        <input
-          type="text"
-          placeholder="Ask a question..."
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        />
-
-        <br /><br />
-
-        <button onClick={askQuestion}>
-          Ask
-        </button>
-
-        <div style={{ marginTop: "20px" }}>
-          {status}
+    <>
+      <section id="center">
+        <div className="hero">
+          <img src={heroImg} className="base" width="170" height="179" alt="" />
+          <img src={reactLogo} className="framework" alt="React logo" />
+          <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
-
-        <div style={{ marginTop: "30px" }}>
-          <strong>Answer:</strong>
-          <p style={{ marginTop: "10px", lineHeight: "1.7" }}>
-            {answer}
+        <div>
+          <h1>Get started</h1>
+          <p>
+            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
         </div>
+        <button
+          type="button"
+          className="counter"
+          onClick={() => setCount((count) => count + 1)}
+        >
+          Count is {count}
+        </button>
+      </section>
 
-      </div>
+      <div className="ticks"></div>
 
-    </div>
-  );
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#documentation-icon"></use>
+          </svg>
+          <h2>Documentation</h2>
+          <p>Your questions, answered</p>
+          <ul>
+            <li>
+              <a href="https://vite.dev/" target="_blank">
+                <img className="logo" src={viteLogo} alt="" />
+                Explore Vite
+              </a>
+            </li>
+            <li>
+              <a href="https://react.dev/" target="_blank">
+                <img className="button-icon" src={reactLogo} alt="" />
+                Learn more
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#social-icon"></use>
+          </svg>
+          <h2>Connect with us</h2>
+          <p>Join the Vite community</p>
+          <ul>
+            <li>
+              <a href="https://github.com/vitejs/vite" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#github-icon"></use>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://chat.vite.dev/" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#discord-icon"></use>
+                </svg>
+                Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/vite_js" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#x-icon"></use>
+                </svg>
+                X.com
+              </a>
+            </li>
+            <li>
+              <a href="https://bsky.app/profile/vite.dev" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#bluesky-icon"></use>
+                </svg>
+                Bluesky
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
 }
+
+export default App
