@@ -1,7 +1,7 @@
 import os
 
 CHUNK_SIZE: int    = int(os.getenv("CHUNK_SIZE",    300))
-CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 80))
+CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 50))
 
 DENSE_TOP_K: int   = int(os.getenv("DENSE_TOP_K",  30))
 SPARSE_TOP_K: int  = int(os.getenv("SPARSE_TOP_K", 30))
@@ -18,3 +18,6 @@ GEMINI_MODEL: str    = os.getenv("GEMINI_MODEL",   "gemini-2.0-flash")
 GEMINI_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta/models"
 
 RRF_K: int = int(os.getenv("RRF_K", 60))
+RERANK_THRESHOLD: float = float(os.getenv("RERANK_THRESHOLD", -3.0))
+RERANK_NUMBER_BOOST: float = float(os.getenv("RERANK_NUMBER_BOOST", 0.1))
+RERANK_KEYWORD_BOOST: float = float(os.getenv("RERANK_KEYWORD_BOOST", 0.02))
