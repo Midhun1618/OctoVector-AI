@@ -25,6 +25,7 @@ def embed_chunks(
     batch_size: int = 64,
     normalize: bool = True,
 ) -> np.ndarray:
+    print("🟢Embedder : Chunks to Float32")
     """
     Convert a list of chunk dicts into a float32 embedding matrix.
 
@@ -56,6 +57,7 @@ def embed_chunks(
 
 
 def embed_query(query: str, normalize: bool = True) -> np.ndarray:
+    print("🟢Embedder : Query Embedding")
     """
     Convert a query string into a 1-D embedding vector.
 

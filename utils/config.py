@@ -1,7 +1,7 @@
 import os
 
-CHUNK_SIZE: int    = int(os.getenv("CHUNK_SIZE",    800))
-CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 150))
+CHUNK_SIZE: int    = int(os.getenv("CHUNK_SIZE",    300))
+CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 80))
 
 DENSE_TOP_K: int   = int(os.getenv("DENSE_TOP_K",  30))
 SPARSE_TOP_K: int  = int(os.getenv("SPARSE_TOP_K", 30))

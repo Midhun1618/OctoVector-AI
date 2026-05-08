@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Dict, Tuple
 
-_CHARS_PER_CHUNK = 4_000
+_CHARS_PER_CHUNK = 15000
 
 
 def _format_chunk(chunk: Dict, max_chars: int = _CHARS_PER_CHUNK) -> str:

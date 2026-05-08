@@ -28,7 +28,7 @@ def main() -> None:
     pdf_path = (
         sys.argv[1]
         if len(sys.argv) > 1
-        else os.getenv("OCTOVECTOR_PDF", "data/raw_pdfs/octovector_rag_testdoc.pdf")
+        else os.getenv("OCTOVECTOR_PDF", "data/raw_pdfs/rag_knowledge_base.pdf")
     )
 
     # Ingestion 
