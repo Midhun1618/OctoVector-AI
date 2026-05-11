@@ -2,7 +2,7 @@ pymupdf
 sentence-transformers
 faiss-cpu
 rank-bm25
-numpy
+numpy==1.26.4
 scikit-learn
 tqdm
 fastapi
@@ -10,4 +10,4 @@ uvicorn
 gunicorn
 python-multipart
 requests
-torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+torch==2.3.1
