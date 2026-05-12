@@ -16,13 +16,13 @@ def _get_model() -> SentenceTransformer:
     global _model
     if _model is None:
         print(f"[Embedder] Loading model: {EMBEDDING_MODEL}")
-        _model = SentenceTransformer(EMBEDDING_MODEL)
+        _model = SentenceTransformer(EMBEDDING_MODEL, device="cpu" )
     return _model
 
 
 def embed_chunks(
     chunks: List[Dict],
-    batch_size: int = 64,
+    batch_size: int = 4,
     normalize: bool = True,
 ) -> np.ndarray:
     print("🟢Embedder : Chunks to Float32")
@@ -48,7 +48,7 @@ def embed_chunks(
     embeddings: np.ndarray = model.encode(
         texts,
         batch_size=batch_size,
-        show_progress_bar=True,
+        show_progress_bar=False,
         convert_to_numpy=True,
         normalize_embeddings=normalize,
     )
