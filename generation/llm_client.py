@@ -1,12 +1,9 @@
 from __future__ import annotations
-
 import time
 import logging
 import os
 from typing import Optional
-
 import requests
-
 from utils.config import GEMINI_API_KEY, GEMINI_MODEL, GEMINI_BASE_URL
 
 logger = logging.getLogger(__name__)
@@ -21,7 +18,6 @@ def _build_url() -> str:
 
 
 def _build_payload(prompt: str) -> dict:
-    print(os.getenv("GEMINI_API_KEY"))
     return {
         "contents": [
             {"parts": [{"text": prompt}]}

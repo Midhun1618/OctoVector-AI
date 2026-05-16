@@ -62,8 +62,6 @@ export default function App() {
 
   return (
     <div className="app">
-
-      {/* Header */}
       <header className="header">
         <div className="logo-wrap">
           <img
@@ -82,7 +80,6 @@ export default function App() {
         </p>
       </header>
 
-      {/* Status */}
       {status && (
         <div className="status-line">
           {loading && <span className="spin" />}
@@ -90,7 +87,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Upload */}
       <section className="block">
         <p className="block-label">Document</p>
         <div
@@ -132,7 +128,6 @@ export default function App() {
 
       <hr className="divider" />
 
-      {/* Question */}
       <section className="block">
         <p className="block-label">Question</p>
         <textarea
@@ -154,7 +149,6 @@ export default function App() {
         </button>
       </section>
 
-      {/* Answer */}
       <section className="block">
         <p className="block-label">Answer</p>
         <div className="answer-box">
