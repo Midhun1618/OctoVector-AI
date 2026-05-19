@@ -76,6 +76,14 @@ body {
   letter-spacing: 0.01em;
   max-width: 420px;
 }
+.header-tagline-error {
+  font-size: 15px;
+  color: #9c3838;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  max-width: 420px;
+}
 
 /* ─── BLOCKS ─── */
 

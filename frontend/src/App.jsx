@@ -78,6 +78,9 @@ export default function App() {
         <p className="header-tagline">
           High-performance RAG · Dense + Sparse fusion · Cross-encoder reranking
         </p>
+        <p className="header-tagline-error">
+          The backend is currently unavailable due to memory limitations on the deployment platform. I'm actively working on resolving the issue.
+        </p>
       </header>
 
       {status && (
