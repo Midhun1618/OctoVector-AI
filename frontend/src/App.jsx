@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 import "./App.css";
+import logo from "./octovector_icon.png";
 
-const API = import.meta.env.VITE_API_URL;
+const API = "http://127.0.0.1:8000";
 
 export default function App() {
   const [file, setFile] = useState(null);
@@ -65,7 +66,7 @@ export default function App() {
       <header className="header">
         <div className="logo-wrap">
           <img
-            src="/octovector_icon.png"
+            src={logo}
             alt="OctoVector"
             onError={e => {
               e.target.style.display = "none";
