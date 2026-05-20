@@ -1,16 +1,16 @@
 import os
 
-CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", 220))
-CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 30))
+CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", 450))
+CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 80))
 
 DENSE_TOP_K: int = int(os.getenv("DENSE_TOP_K", 15))
 SPARSE_TOP_K: int = int(os.getenv("SPARSE_TOP_K", 15))
 RERANK_TOP_K: int = int(os.getenv("RERANK_TOP_K", 5))
-FINAL_TOP_K: int = int(os.getenv("FINAL_TOP_K", 3))
+FINAL_TOP_K: int = int(os.getenv("FINAL_TOP_K", 5))
 
 EMBEDDING_MODEL: str = os.getenv(
     "EMBEDDING_MODEL",
-    "sentence-transformers/paraphrase-MiniLM-L3-v2"
+    "sentence-transformers/all-MiniLM-L6-v2"
 )
 
 RERANK_MODEL: str = os.getenv(
@@ -31,16 +31,16 @@ GEMINI_BASE_URL: str = (
     "https://generativelanguage.googleapis.com/v1beta/models"
 )
 
-RRF_K: int = int(os.getenv("RRF_K", 60))
+RRF_K: int = int(os.getenv("RRF_K", 30))
 
 RERANK_THRESHOLD: float = float(
-    os.getenv("RERANK_THRESHOLD", -3.0)
+    os.getenv("RERANK_THRESHOLD", -5.0)
 )
 
 RERANK_NUMBER_BOOST: float = float(
-    os.getenv("RERANK_NUMBER_BOOST", 0.05)
+    os.getenv("RERANK_NUMBER_BOOST", 0.10)
 )
 
 RERANK_KEYWORD_BOOST: float = float(
-    os.getenv("RERANK_KEYWORD_BOOST", 0.01)
+    os.getenv("RERANK_KEYWORD_BOOST", 0.03)
 )
