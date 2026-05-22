@@ -64,7 +64,17 @@ def retrieve_chunks(
         chunks=chunks,
     )
     candidate_k = min(20, len(chunks))
-    retrieved = hybrid_retriever.retrieve(query=query, k=candidate_k)
+    retrieved = hybrid_retriever.retrieve(query=query,k=candidate_k)
+    
+    print("\n===== HYBRID RESULTS =====")
+
+    for i,c in enumerate(retrieved):
+        print(
+            f"\nRank {i+1}"
+        )
+        print("Score:", c.get("score"))
+        print(c["text"][:250])
+
     logger.info("[Retrieval] Hybrid retrieved %d candidates in %.2fs", len(retrieved), time.time() - t0)
 
     t0 = time.time()

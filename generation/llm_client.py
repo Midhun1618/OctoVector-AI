@@ -29,13 +29,24 @@ def _build_payload(prompt: str) -> dict:
     }
 
 
+
 def _parse_response(data: dict) -> str:
     try:
-        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+        parts = data["candidates"][0]["content"]["parts"]
+
+        text = "".join(
+            part.get("text", "")
+            for part in parts
+        )
+
+        return text.strip()
+
     except (KeyError, IndexError) as exc:
-        raise RuntimeError(f"Unexpected Gemini response shape: {exc}\n{data}") from exc
-
-
+        raise RuntimeError(
+            f"Unexpected Gemini response shape: {exc}\n{data}"
+        ) from exc
+    
+    
 def generate_answer(prompt: str, api_key: Optional[str] = None) -> str:
     print("🟢LLM : Starting to Generate Response")
     """
@@ -98,5 +109,12 @@ def generate_answer(prompt: str, api_key: Optional[str] = None) -> str:
         raise RuntimeError(
             f"Gemini API returned HTTP {response.status_code}: {response.text}"
         )
+    if response.status_code == 200:
+        data=response.json()
+
+        print("\n===== RAW GEMINI RESPONSE =====")
+        print(data)
+
+        return _parse_response(data)
 
     raise RuntimeError("LLM request exhausted all retries.")

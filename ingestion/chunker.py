@@ -1,86 +1,127 @@
 from __future__ import annotations
 
 import re
-import logging
 from typing import List
 
-from utils.config import CHUNK_SIZE, CHUNK_OVERLAP
 
-logger = logging.getLogger(__name__)
+class Chunker:
+    def __init__(
+        self,
+        chunk_size: int = 80,
+        overlap: int = 40,
+    ):
+        self.chunk_size = chunk_size
+        self.overlap = overlap
 
-_ABBREV_PATTERN = re.compile(
-    r"\b(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|Fig|No|Vol|vs|etc|approx|e\.g|i\.e)\.",
-    re.IGNORECASE,
-)
+    def split_sentences(
+        self,
+        text: str,
+    ) -> List[str]:
 
-_MIN_CHUNK_WORDS = 10
+        print("🟢Chunker : spliting sentence")
 
+        text = re.sub(
+            r"(Chapter\s+\d+)",
+            r" \1",
+            text,
+            flags=re.IGNORECASE
+        )
 
-def split_into_sentences(text: str) -> List[str]:
-    print("🟢Chunker : spliting sentence")
-    """
-    Split *text* into sentences using punctuation boundaries,
-    while respecting common abbreviations.
-    """
-    masked = _ABBREV_PATTERN.sub(lambda m: m.group().replace(".", "<!DOT!>"), text)
+        sentences = re.split(
+            r'(?<=[.!?])\s+',
+            text
+        )
 
-    parts = re.split(r"(?<=[.!?])\s+", masked)
+        # remove empty/tiny junk
+        cleaned = [
+            s.strip()
+            for s in sentences
+            if len(s.strip()) > 5
+        ]
 
-    sentences = [
-        p.replace("<!DOT!>", ".").strip()
-        for p in parts
-        if p.strip()
-    ]
-    return sentences
+        return cleaned
 
+    def chunk(
+        self,
+        text: str,
+    ) -> List[str]:
+
+        print("🟢Chunker : chunking text")
+
+        sentences = self.split_sentences(text)
+
+        chunks = []
+        current_words = []
+
+        for sentence in sentences:
+
+            sentence = sentence.strip()
+
+            # start fresh at chapter boundaries
+            if re.search(
+                r"^Chapter\s+\d+",
+                sentence,
+                re.IGNORECASE
+            ):
+
+                if current_words:
+                    joined = " ".join(current_words)
+
+                    if len(joined.split()) > 5:
+                        chunks.append(joined)
+
+                current_words = []
+
+            words = sentence.split()
+
+            if (
+                len(current_words)
+                + len(words)
+                > self.chunk_size
+            ):
+
+                joined = " ".join(current_words)
+
+                if len(joined.split()) > 5:
+                    chunks.append(joined)
+
+                overlap_words = current_words[
+                    -self.overlap:
+                ]
+
+                current_words = overlap_words
+
+            current_words.extend(words)
+
+        if current_words:
+
+            joined = " ".join(current_words)
+
+            if len(joined.split()) > 5:
+                chunks.append(joined)
+
+        print("\n===== CHUNK DEBUG =====")
+
+        for i, chunk in enumerate(
+            chunks[:10],
+            start=1
+        ):
+            print(f"\nChunk {i}")
+            print(
+                f"Words: {len(chunk.split())}"
+            )
+            print(chunk[:500])
+
+        return chunks
 
 def chunk_text(
     text: str,
-    chunk_size: int = CHUNK_SIZE,
-    overlap: int = CHUNK_OVERLAP,
-) -> List[str]:
-    print("🟢Chunker : chunking text")
-    """
-    Sentence-aware chunking with word-count-based overlap.
+    chunk_size: int = 80,
+    overlap: int = 50,
+):
+    chunker = Chunker(
+        chunk_size=chunk_size,
+        overlap=overlap
+    )
 
-    Parameters
-    ----------
-    text       : Raw page / document text.
-    chunk_size : Target size in words.
-    overlap    : Number of words carried forward from the previous chunk.
-
-    Returns
-    -------
-    List of non-empty chunk strings.
-    """
-    text = text.strip()
-    if not text:
-        return []
-
-    sentences = split_into_sentences(text)
-
-    chunks: List[str] = []
-    current_words: List[str] = []
-
-    for sentence in sentences:
-        s_words = sentence.split()
-
-        if len(current_words) + len(s_words) > chunk_size and current_words:
-            chunk_str = " ".join(current_words)
-
-            if len(current_words) >= _MIN_CHUNK_WORDS:
-                chunks.append(chunk_str)
-
-            current_words = current_words[-overlap:] if overlap else []
-
-        current_words.extend(s_words)
-
-    if current_words:
-        chunk_str = " ".join(current_words)
-        if len(current_words) >= _MIN_CHUNK_WORDS:
-            chunks.append(chunk_str)
-        elif chunks:
-            chunks[-1] = chunks[-1] + " " + chunk_str
-
-    logger.debug("[Chunker] Produced %d chunks from %d sentences", len(chunks), len(sentences))
-    return chunks
+    return chunker.chunk(text)

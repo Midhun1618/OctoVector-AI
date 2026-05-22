@@ -29,6 +29,12 @@ def generate_response(
     est_tokens = len(prompt) // 4
     logger.info("[Generation] Prompt sent to LLM — estimated tokens: %d", est_tokens)
 
+    print("\n===== RETRIEVED CHUNKS =====")
+
+    for i, chunk in enumerate(retrieved_chunks):
+        print(f"\nChunk {i+1}")
+        print(chunk["text"][:400])
+
     answer = generate_answer(prompt)
 
     return {

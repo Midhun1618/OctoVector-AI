@@ -50,32 +50,76 @@ def extract_text_from_pdf(
         pdf_path, start_page, end_page, total_pages,
     )
 
-    all_chunks: List[Dict] = []
+    all_text = []
 
     for page_num in range(start_page, end_page + 1):
         page = doc[page_num - 1]
         raw_text = page.get_text()
 
         if not raw_text.strip():
-            logger.warning("[Parser] Page %d has no extractable text — skipping.", page_num)
+            logger.warning(
+                "[Parser] Page %d has no extractable text — skipping.",
+                page_num
+            )
             continue
 
         cleaned_text = clean_text(raw_text)
 
-        if not cleaned_text:
-            logger.warning("[Parser] Page %d empty after cleaning — skipping.", page_num)
+        if (
+            "Table of Contents" in cleaned_text
+            or "Version 1.0" in cleaned_text
+            or "The Comprehensive Knowledge Base" in cleaned_text
+        ):
+            logger.info(
+                "[Parser] Skipping front matter page %d",
+                page_num
+            )
             continue
 
-        chunks = chunk_text(cleaned_text)
+        if not cleaned_text:
+            logger.warning(
+                "[Parser] Page %d empty after cleaning — skipping.",
+                page_num
+            )
+            continue
 
-        for i, chunk in enumerate(chunks):
-            all_chunks.append({
-                "chunk_id":   f"p{page_num}_c{i}",
-                "text":       chunk,
-                "page":       page_num,
-                "char_count": len(chunk),
-            })
+        all_text.append(cleaned_text)
+
+
+    document_text = "\n".join(all_text)
+
+    chunks = chunk_text(document_text)
+
+    all_chunks: List[Dict] = []
+
+    for i, chunk in enumerate(chunks):
+
+        all_chunks.append({
+
+            "chunk_id": f"c{i}",
+
+            "text": chunk,
+
+            "page": -1,
+
+            "char_count": len(chunk),
+
+        })
+
+
+    print("\n===== CHUNK DEBUG =====")
+
+    for i,c in enumerate(all_chunks[:10]):
+        print(f"\nChunk {i+1}")
+        print("Words:", len(c["text"].split()))
+        print(c["text"][:400])
+
 
     doc.close()
-    logger.info("[Parser] Total chunks produced: %d", len(all_chunks))
+
+    logger.info(
+        "[Parser] Total chunks produced: %d",
+        len(all_chunks)
+    )
+
     return all_chunks

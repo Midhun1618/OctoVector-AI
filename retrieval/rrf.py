@@ -11,40 +11,75 @@ def reciprocal_rank_fusion(
     k: int = RRF_K,
 ) -> List[Dict]:
     print("🟢RRF : Merging and Reranking Dense & Sparse result")
-    """
-    Merge and re-rank *dense_results* and *sparse_results* using
-    Reciprocal Rank Fusion (RRF).
 
-    Each input item must have a "chunk_id" key.
-
-    Returns a list of chunk dicts sorted by descending rrf_score.
-    """
     scores: dict[str, float] = {}
 
-    def _accumulate(results: List[Dict]) -> None:
-        for rank, item in enumerate(results):
-            cid = item["chunk_id"]
-            scores[cid] = scores.get(cid, 0.0) + 1.0 / (k + rank + 1)
+    # Keep strongest candidates only
+    dense_results = dense_results[:10]
+    sparse_results = sparse_results[:10]
 
-    _accumulate(dense_results)
-    _accumulate(sparse_results)
+    def _accumulate(
+        results: List[Dict],
+        source_weight: float,
+    ) -> None:
+
+        for rank, item in enumerate(results):
+
+            cid = item["chunk_id"]
+
+            rrf_score = source_weight * (
+                1.0 / (k + rank + 1)
+            )
+
+            scores[cid] = (
+                scores.get(cid, 0.0)
+                + rrf_score
+            )
+
+    # Dense semantic retrieval gets slightly more importance
+    _accumulate(
+        dense_results,
+        source_weight=1.2
+    )
+
+    # Sparse exact keyword matching
+    _accumulate(
+        sparse_results,
+        source_weight=1.0
+    )
 
     all_chunks: dict[str, Dict] = {}
-    for item in sparse_results:
-        all_chunks[item["chunk_id"]] = item
-    for item in dense_results:          
-        all_chunks[item["chunk_id"]] = item
 
-    max_score = 1.0 / (k + 1) * 2
+    for item in dense_results + sparse_results:
+        all_chunks[item["chunk_id"]] = item
 
     ranked = sorted(
         all_chunks.values(),
-        key=lambda x: scores[x["chunk_id"]],
+        key=lambda x: scores.get(
+            x["chunk_id"],
+            0.0
+        ),
         reverse=True,
     )
 
     for item in ranked:
-        raw = scores[item["chunk_id"]]
-        item["rrf_score"] = raw / max_score
+        item["rrf_score"] = scores.get(
+            item["chunk_id"],
+            0.0
+        )
+
+    print("\n===== RRF RESULTS =====")
+
+    for i, item in enumerate(ranked[:15]):
+
+        print(f"\nRank {i+1}")
+        print(
+            "RRF Score:",
+            round(item["rrf_score"],4)
+        )
+
+        print(
+            item["text"][:250]
+        )
 
     return ranked

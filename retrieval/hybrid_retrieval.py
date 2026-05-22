@@ -14,6 +14,16 @@ class HybridRetriever:
         dense_results = self.dense.retrieve(query, k=DENSE_TOP_K)
         sparse_results = self.sparse.retrieve(query, k=SPARSE_TOP_K)
 
-        fused = reciprocal_rank_fusion(dense_results, sparse_results)
+        fused = reciprocal_rank_fusion(
+            dense_results,
+            sparse_results
+        )
+
+        print("\n===== RRF RESULTS =====")
+
+        for i,c in enumerate(fused[:15]):
+            print(f"\nRank {i+1}")
+            print("score:", c.get("score"))
+            print(c["text"][:250])
 
         return fused[:k]
