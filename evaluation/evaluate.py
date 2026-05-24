@@ -1,120 +1,46 @@
 from __future__ import annotations
 
 import json
-import re
-import time
-from pathlib import Path
-from typing import Dict, List
-
 import requests
+import time
+import numpy as np
+
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+# ============================================================
+# CONFIG
+# ============================================================
+
 API_URL = "http://127.0.0.1:8000/query"
 
-DATASET_PATH = "test_data.json"
+DATASET_PATH = "dataset.json"
 
-SIMILARITY_THRESHOLD = 0.70
+SIMILARITY_THRESHOLD = 0.65
 
-EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+REQUEST_DELAY = 10
+
+
+# ============================================================
+# LOAD EMBEDDING MODEL
+# ============================================================
 
 print("\n🟢 Loading evaluation embedding model...\n")
 
-embedder = SentenceTransformer(EMBED_MODEL)
-
-def clean_text(text: str) -> str:
-
-    text = text.lower()
-
-    text = re.sub(
-        r"[^a-z0-9\s]",
-        "",
-        text
-    )
-
-    return text.strip()
-
-
-def keyword_score(
-    generated: str,
-    keywords: List[str],
-) -> float:
-
-    if not keywords:
-        return 0.0
-
-    generated = clean_text(generated)
-
-    matched = 0
-
-    for kw in keywords:
-
-        if clean_text(kw) in generated:
-            matched += 1
-
-    return matched / len(keywords)
-
-
-def semantic_similarity(
-    text1: str,
-    text2: str,
-) -> float:
-
-    emb1 = embedder.encode([text1])
-
-    emb2 = embedder.encode([text2])
-
-    score = cosine_similarity(
-        emb1,
-        emb2
-    )[0][0]
-
-    return float(score)
-
-
-def ask_rag(
-    question: str,
-) -> str:
-
-    response = requests.post(
-        API_URL,
-        json={
-            "question": question
-        },
-        timeout=120
-    )
-
-    response.raise_for_status()
-
-    data = response.json()
-
-    # change this if your API response differs
-    return data.get(
-        "answer",
-        ""
-    )
+embedding_model = SentenceTransformer(
+    "sentence-transformers/all-MiniLM-L6-v2"
+)
 
 
 # ============================================================
 # LOAD DATASET
 # ============================================================
 
-dataset_path = Path(DATASET_PATH)
-
-if not dataset_path.exists():
-
-    raise FileNotFoundError(
-        f"Dataset not found: {DATASET_PATH}"
-    )
-
-with open(
-    dataset_path,
-    "r",
-    encoding="utf-8"
-) as f:
-
+with open(DATASET_PATH, "r", encoding="utf-8") as f:
     dataset = json.load(f)
+
+print(f"🟢 Loaded {len(dataset)} evaluation samples\n")
 
 
 # ============================================================
@@ -123,244 +49,208 @@ with open(
 
 total_questions = len(dataset)
 
-passed_similarity = 0
+correct_answers = 0
 
-passed_keywords = 0
+faithful_answers = 0
 
-all_similarity_scores = []
+relevant_answers = 0
 
-all_keyword_scores = []
-
-results = []
+similarity_scores = []
 
 
 # ============================================================
-# START EVALUATION
+# EVALUATION LOOP
 # ============================================================
 
-print("=" * 60)
-print("🚀 STARTING RAG EVALUATION")
-print("=" * 60)
+for idx, sample in enumerate(dataset, start=1):
 
-start_time = time.time()
+    question = sample["question"]
 
-for idx, item in enumerate(dataset, start=1):
+    expected_answer = sample["expected_answer"]
 
-    question = item["question"]
+    print("\n===================================================")
 
-    expected = item["expected_answer"]
+    print(f"QUESTION {idx}")
 
-    keywords = item.get(
-        "relevant_keywords",
-        []
-    )
+    print("===================================================\n")
 
-    difficulty = item.get(
-        "difficulty",
-        "unknown"
-    )
+    print(f"Q: {question}\n")
 
-    qtype = item.get(
-        "type",
-        "unknown"
-    )
-
-    print(f"\n[{idx}/{total_questions}]")
-    print("-" * 60)
-
-    print(f"Question: {question}")
-
-    # ========================================================
-    # GET RAG ANSWER
-    # ========================================================
+    # --------------------------------------------------------
+    # CALL API
+    # --------------------------------------------------------
 
     try:
 
-        generated = ask_rag(question)
+        response = requests.post(
+            API_URL,
+            json={
+                "question": question
+            }
+        )
 
     except Exception as e:
 
-        print(f"❌ API ERROR: {e}")
+        print(f"❌ Request Failed: {e}")
 
         continue
 
-    print(f"\nGenerated:\n{generated}")
+    # --------------------------------------------------------
+    # CHECK RESPONSE
+    # --------------------------------------------------------
 
-    # ========================================================
-    # METRICS
-    # ========================================================
+    if response.status_code != 200:
 
-    similarity = semantic_similarity(
-        expected,
-        generated
+        print(
+            f"❌ API ERROR: {response.status_code}"
+        )
+
+        print(response.text)
+
+        continue
+
+    try:
+
+        result = response.json()
+
+    except Exception:
+
+        print("❌ Invalid JSON response")
+
+        print(response.text)
+
+        continue
+
+    predicted_answer = result.get(
+        "answer",
+        ""
     )
 
-    keyword_match = keyword_score(
-        generated,
-        keywords
+    print(f"EXPECTED:\n{expected_answer}\n")
+
+    print(f"PREDICTED:\n{predicted_answer}\n")
+
+    # --------------------------------------------------------
+    # SEMANTIC SIMILARITY
+    # --------------------------------------------------------
+
+    expected_embedding = embedding_model.encode(
+        [expected_answer]
     )
 
-    similarity_pass = (
-        similarity >= SIMILARITY_THRESHOLD
+    predicted_embedding = embedding_model.encode(
+        [predicted_answer]
     )
 
-    keyword_pass = (
-        keyword_match >= 0.50
+    similarity = cosine_similarity(
+        expected_embedding,
+        predicted_embedding
+    )[0][0]
+
+    similarity_scores.append(similarity)
+
+    print(f"Semantic Similarity: {similarity:.4f}")
+
+    # --------------------------------------------------------
+    # ACCURACY
+    # --------------------------------------------------------
+
+    if similarity >= SIMILARITY_THRESHOLD:
+
+        correct_answers += 1
+
+        print("✅ Correct")
+
+    else:
+
+        print("❌ Incorrect")
+
+    # --------------------------------------------------------
+    # ANSWER RELEVANCE
+    # --------------------------------------------------------
+
+    if similarity >= 0.60:
+
+        relevant_answers += 1
+
+    # --------------------------------------------------------
+    # FAITHFULNESS
+    # --------------------------------------------------------
+
+    hallucination_phrases = [
+        "i think",
+        "maybe",
+        "probably",
+        "might be",
+        "possibly"
+    ]
+
+    hallucinated = any(
+        phrase in predicted_answer.lower()
+        for phrase in hallucination_phrases
     )
 
-    if similarity_pass:
-        passed_similarity += 1
+    if not hallucinated:
 
-    if keyword_pass:
-        passed_keywords += 1
+        faithful_answers += 1
 
-    all_similarity_scores.append(similarity)
+    # --------------------------------------------------------
+    # DELAY
+    # --------------------------------------------------------
 
-    all_keyword_scores.append(keyword_match)
-
-    # ========================================================
-    # PRINT SCORES
-    # ========================================================
-
-    print("\n📊 METRICS")
-
-    print(
-        f"Semantic Similarity : "
-        f"{similarity:.3f}"
-    )
-
-    print(
-        f"Keyword Match       : "
-        f"{keyword_match:.3f}"
-    )
-
-    print(
-        f"Similarity Pass     : "
-        f"{'✅' if similarity_pass else '❌'}"
-    )
-
-    print(
-        f"Keyword Pass        : "
-        f"{'✅' if keyword_pass else '❌'}"
-    )
-
-    results.append(
-        {
-            "question": question,
-            "expected": expected,
-            "generated": generated,
-            "similarity": similarity,
-            "keyword_match": keyword_match,
-            "difficulty": difficulty,
-            "type": qtype,
-        }
-    )
+    time.sleep(REQUEST_DELAY)
 
 
 # ============================================================
-# FINAL REPORT
+# FINAL METRICS
 # ============================================================
 
-total_time = time.time() - start_time
+accuracy = (
+    correct_answers / total_questions
+) * 100
 
 avg_similarity = (
-    sum(all_similarity_scores)
-    / len(all_similarity_scores)
-)
-
-avg_keyword = (
-    sum(all_keyword_scores)
-    / len(all_keyword_scores)
-)
-
-similarity_accuracy = (
-    passed_similarity
-    / total_questions
+    np.mean(similarity_scores)
 ) * 100
 
-keyword_accuracy = (
-    passed_keywords
-    / total_questions
+faithfulness = (
+    faithful_answers / total_questions
 ) * 100
 
-overall_score = (
-    (
-        similarity_accuracy
-        + keyword_accuracy
-    ) / 2
-)
-
-print("\n")
-print("=" * 60)
-print("📈 FINAL EVALUATION REPORT")
-print("=" * 60)
-
-print(
-    f"Total Questions        : "
-    f"{total_questions}"
-)
-
-print(
-    f"Average Similarity     : "
-    f"{avg_similarity:.3f}"
-)
-
-print(
-    f"Average Keyword Match  : "
-    f"{avg_keyword:.3f}"
-)
-
-print(
-    f"Similarity Accuracy    : "
-    f"{similarity_accuracy:.2f}%"
-)
-
-print(
-    f"Keyword Accuracy       : "
-    f"{keyword_accuracy:.2f}%"
-)
-
-print(
-    f"\n🏆 OVERALL RAG SCORE    : "
-    f"{overall_score:.2f}/100"
-)
-
-print(
-    f"⏱ Evaluation Time      : "
-    f"{total_time:.2f} sec"
-)
-
-print("=" * 60)
+answer_relevance = (
+    relevant_answers / total_questions
+) * 100
 
 
 # ============================================================
-# SAVE REPORT
+# RESULTS
 # ============================================================
 
-report = {
-    "summary": {
-        "total_questions": total_questions,
-        "average_similarity": avg_similarity,
-        "average_keyword_match": avg_keyword,
-        "similarity_accuracy": similarity_accuracy,
-        "keyword_accuracy": keyword_accuracy,
-        "overall_score": overall_score,
-        "evaluation_time_sec": total_time,
-    },
-    "results": results,
-}
+print("\n\n===================================================")
 
-with open(
-    "evaluation_report.json",
-    "w",
-    encoding="utf-8"
-) as f:
+print(" FINAL EVALUATION RESULTS ")
 
-    json.dump(
-        report,
-        f,
-        indent=2,
-        ensure_ascii=False
-    )
+print("===================================================\n")
 
-print("\n✅ Saved report to evaluation_report.json")
+print(f"Total Questions        : {total_questions}")
+
+print(f"Correct Answers        : {correct_answers}")
+
+print(f"Accuracy               : {accuracy:.2f}%")
+
+print(
+    f"Average Semantic Score : "
+    f"{avg_similarity:.2f}%"
+)
+
+print(
+    f"Faithfulness Score     : "
+    f"{faithfulness:.2f}%"
+)
+
+print(
+    f"Answer Relevance       : "
+    f"{answer_relevance:.2f}%"
+)
+
+print("\n===================================================\n")
