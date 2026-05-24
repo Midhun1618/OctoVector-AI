@@ -1,0 +1,352 @@
+[
+  {
+    "question": "Who developed GPT?",
+    "expected_answer": "GPT (Generative Pre-trained Transformer) was developed by OpenAI.",
+    "relevant_keywords": ["GPT", "OpenAI", "Generative Pre-trained Transformer"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What capability was introduced in GPT-4?",
+    "expected_answer": "GPT-4 introduced multimodal capabilities, processing both text and images.",
+    "relevant_keywords": ["GPT-4", "multimodal", "text", "images"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is Retrieval-Augmented Generation (RAG)?",
+    "expected_answer": "RAG is an architectural pattern that enhances LLMs by coupling them with external knowledge retrieval, retrieving relevant documents from a vector database at inference time and feeding them as context to the generator.",
+    "relevant_keywords": ["RAG", "retrieval", "vector database", "LLM", "context", "hallucinations"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is the Transformer architecture based on?",
+    "expected_answer": "The Transformer architecture is based on a self-attention mechanism that weighs the relevance of each word in a sentence against every other word, enabling nuanced contextual understanding.",
+    "relevant_keywords": ["Transformer", "self-attention", "attention mechanism", "Vaswani"],
+    "difficulty": "medium",
+    "type": "fact"
+  },
+  {
+    "question": "When was the Dartmouth Conference that formally established AI as a discipline?",
+    "expected_answer": "The Dartmouth Conference was held in 1956, where AI was established as a formal academic discipline.",
+    "relevant_keywords": ["Dartmouth Conference", "1956", "AI", "McCarthy", "Minsky"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is BERT and who released it?",
+    "expected_answer": "BERT (Bidirectional Encoder Representations from Transformers) was released by Google in 2018. It introduced bidirectional pre-training, reading text from both left-to-right and right-to-left simultaneously.",
+    "relevant_keywords": ["BERT", "Google", "2018", "bidirectional", "pre-training"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What does the greenhouse effect do to Earth's temperature?",
+    "expected_answer": "The greenhouse effect warms Earth's surface by trapping heat. Without it, Earth's average temperature would be approximately -18°C rather than the current +15°C.",
+    "relevant_keywords": ["greenhouse effect", "temperature", "-18°C", "+15°C", "infrared", "heat"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What are the primary greenhouse gases responsible for climate change?",
+    "expected_answer": "The primary greenhouse gases include water vapor (H2O), carbon dioxide (CO2), methane (CH4), nitrous oxide (N2O), and ozone (O3).",
+    "relevant_keywords": ["CO2", "methane", "CH4", "N2O", "water vapor", "ozone", "greenhouse gases"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What was the Paris Agreement's temperature target?",
+    "expected_answer": "The Paris Agreement (2015) established the goal of limiting global temperature increase to well below 2°C above pre-industrial levels, with efforts to limit it to 1.5°C.",
+    "relevant_keywords": ["Paris Agreement", "2015", "2°C", "1.5°C", "pre-industrial"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What writing system did the Sumerians develop?",
+    "expected_answer": "The Sumerians developed cuneiform, the world's earliest known writing system, originally used for administrative record-keeping.",
+    "relevant_keywords": ["Sumerians", "cuneiform", "writing system", "Mesopotamia"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What caused the 2008 Global Financial Crisis?",
+    "expected_answer": "The 2008 Global Financial Crisis originated in the US housing market, driven by loose lending standards, financial innovation (mortgage-backed securities and collateralized debt obligations), excessive leverage, and regulatory failures. When US house prices fell and subprime mortgage defaults surged, institutions holding mortgage-backed securities suffered massive losses.",
+    "relevant_keywords": ["2008", "financial crisis", "housing market", "mortgage-backed securities", "subprime", "Lehman Brothers"],
+    "difficulty": "medium",
+    "type": "fact"
+  },
+  {
+    "question": "Who invented the World Wide Web and where?",
+    "expected_answer": "Tim Berners-Lee invented the World Wide Web at CERN in 1989, adding HTTP, HTML, and URLs to create a global hyperlinked document system.",
+    "relevant_keywords": ["Tim Berners-Lee", "CERN", "1989", "World Wide Web", "HTTP", "HTML"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is neuroplasticity?",
+    "expected_answer": "Neuroplasticity is the brain's ability to reorganize itself by forming new neural connections throughout life, underlying learning, memory, and recovery from injury.",
+    "relevant_keywords": ["neuroplasticity", "neural connections", "learning", "memory", "brain"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is Kant's categorical imperative?",
+    "expected_answer": "Kant's categorical imperative states: 'Act only according to that maxim by which you can at the same time will that it should become a universal law.' He also formulated the principle of treating persons always as ends in themselves, never merely as means.",
+    "relevant_keywords": ["Kant", "categorical imperative", "universal law", "deontological", "ethics"],
+    "difficulty": "medium",
+    "type": "fact"
+  },
+  {
+    "question": "What is the Big Bang theory?",
+    "expected_answer": "The Big Bang theory describes the origin of the universe from an extremely hot, dense state approximately 13.8 billion years ago. Evidence includes the cosmic microwave background radiation and the observed expansion of the universe.",
+    "relevant_keywords": ["Big Bang", "13.8 billion", "CMB", "cosmic microwave background", "expanding universe"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What does E=mc² represent?",
+    "expected_answer": "E=mc² is Einstein's mass-energy equivalence equation from his Special Theory of Relativity (1905), stating that energy equals mass multiplied by the speed of light squared.",
+    "relevant_keywords": ["E=mc2", "Einstein", "mass-energy equivalence", "Special Relativity", "speed of light"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is long-term potentiation (LTP)?",
+    "expected_answer": "Long-term potentiation (LTP) is a persistent strengthening of synapses based on activity patterns, considered the primary cellular mechanism of learning and memory. It was first described by Timothy Bliss and Terje Lomo in 1973 in the hippocampus.",
+    "relevant_keywords": ["LTP", "long-term potentiation", "synapses", "learning", "memory", "hippocampus"],
+    "difficulty": "medium",
+    "type": "fact"
+  },
+  {
+    "question": "What is the IPCC and when was it established?",
+    "expected_answer": "The IPCC (Intergovernmental Panel on Climate Change) was established in 1988 by the United Nations Environment Programme and the World Meteorological Organization to synthesize peer-reviewed climate science studies.",
+    "relevant_keywords": ["IPCC", "1988", "United Nations", "climate science", "assessment reports"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is utilitarianism?",
+    "expected_answer": "Utilitarianism is a form of consequentialism where the right action is the one that produces the greatest good for the greatest number. Key proponents are Jeremy Bentham and John Stuart Mill.",
+    "relevant_keywords": ["utilitarianism", "consequentialism", "Bentham", "Mill", "greatest good"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "What is the Unix operating system and who created it?",
+    "expected_answer": "Unix is an operating system created by Ken Thompson and Dennis Ritchie at Bell Labs in 1969. It pioneered a hierarchical file system, multitasking, and inter-process communication via pipes.",
+    "relevant_keywords": ["Unix", "Ken Thompson", "Dennis Ritchie", "Bell Labs", "1969"],
+    "difficulty": "easy",
+    "type": "fact"
+  },
+  {
+    "question": "Compare GPT-3 and GPT-4 in terms of capabilities and parameters.",
+    "expected_answer": "GPT-3 (2020) had 175 billion parameters and demonstrated remarkable few-shot learning capabilities. GPT-4 (2023) extended this by introducing multimodal capabilities, able to process both text and images, representing a significant leap beyond GPT-3's text-only processing.",
+    "relevant_keywords": ["GPT-3", "GPT-4", "175 billion", "parameters", "multimodal", "few-shot", "2020", "2023"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare supervised learning and unsupervised learning.",
+    "expected_answer": "Supervised learning trains on labeled data to map inputs to known outputs (e.g., spam detection, image classification). Unsupervised learning finds hidden patterns in unlabeled data using techniques like clustering (k-means) and dimensionality reduction (PCA). The key difference is whether training data is labeled.",
+    "relevant_keywords": ["supervised learning", "unsupervised learning", "labeled", "unlabeled", "clustering", "classification"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare innate immunity and adaptive immunity.",
+    "expected_answer": "Innate immunity is the first line of defense, responding rapidly (minutes to hours) using physical barriers and cellular components like macrophages, recognizing broad pathogen patterns. Adaptive immunity is slower (days to weeks) but highly specific and long-lasting, involving B and T lymphocytes that provide immunological memory for future exposures.",
+    "relevant_keywords": ["innate immunity", "adaptive immunity", "B cells", "T cells", "rapid", "specific", "memory"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare Keynesian and Classical economics.",
+    "expected_answer": "Classical economics (Adam Smith) argues free markets guided by the 'invisible hand' efficiently allocate resources without central coordination. Keynesian economics (John Maynard Keynes) argues that aggregate demand drives output and that government intervention via fiscal and monetary policy is necessary to stabilize economies, especially during downturns like the Great Depression.",
+    "relevant_keywords": ["Keynesian", "Classical", "Adam Smith", "Keynes", "invisible hand", "aggregate demand", "government intervention"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare BERT and GPT in their pre-training approach.",
+    "expected_answer": "BERT uses bidirectional pre-training, reading text from both left-to-right and right-to-left simultaneously, making it better for understanding tasks like question answering and sentiment analysis. GPT uses unidirectional (left-to-right) pre-training, making it better suited for text generation tasks.",
+    "relevant_keywords": ["BERT", "GPT", "bidirectional", "unidirectional", "pre-training", "generation", "understanding"],
+    "difficulty": "hard",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare Special and General Relativity.",
+    "expected_answer": "Special Relativity (1905) applies to observers in uniform motion and introduced time dilation, length contraction, and mass-energy equivalence (E=mc²). General Relativity (1915) extended these to accelerating frames, reinterpreting gravity as the curvature of spacetime caused by mass and energy rather than a force.",
+    "relevant_keywords": ["Special Relativity", "General Relativity", "1905", "1915", "spacetime", "gravity", "curvature", "E=mc2"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare the Greenland Ice Sheet and West Antarctic Ice Sheet in terms of sea level rise potential.",
+    "expected_answer": "The Greenland Ice Sheet holds enough water to raise global sea levels by approximately 7.2 meters if fully melted, with destabilization estimated to begin between 1.5°C and 2°C of warming. The West Antarctic Ice Sheet (WAIS) contains ice equivalent to 3.3 meters of sea level rise and may have already reached a tipping point due to ocean warming beneath its glaciers.",
+    "relevant_keywords": ["Greenland Ice Sheet", "West Antarctic Ice Sheet", "WAIS", "7.2 meters", "3.3 meters", "tipping point"],
+    "difficulty": "hard",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare RNNs and Transformers for NLP tasks.",
+    "expected_answer": "RNNs (Recurrent Neural Networks, 1990) process sequences step-by-step capturing temporal dependencies but struggle with long-range dependencies and cannot be parallelized easily. Transformers (2017) use self-attention to relate all positions simultaneously, enabling full parallelization and much better handling of long-range dependencies, which is why they have largely replaced RNNs in NLP.",
+    "relevant_keywords": ["RNN", "Transformer", "self-attention", "parallelization", "sequential", "NLP", "long-range"],
+    "difficulty": "hard",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare live-attenuated vaccines and mRNA vaccines.",
+    "expected_answer": "Live-attenuated vaccines (e.g., MMR) use weakened forms of a pathogen to trigger immunity. mRNA vaccines (e.g., COVID-19 vaccines from Pfizer-BioNTech and Moderna) instruct cells to produce a viral protein that triggers an immune response, without using any part of the actual pathogen. mRNA vaccines represent a newer technology and can be developed more rapidly.",
+    "relevant_keywords": ["live-attenuated", "mRNA", "MMR", "COVID-19", "Pfizer", "Moderna", "immune response"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare World War I and World War II in terms of death toll.",
+    "expected_answer": "World War I (1914–1918) killed approximately 17 million people, with an additional 50 million dying in the 1918 influenza pandemic. World War II (1939–1945) was far deadlier, killing an estimated 70–85 million people — roughly 3% of the world's 1940 population — making it the deadliest conflict in human history.",
+    "relevant_keywords": ["World War I", "World War II", "17 million", "70-85 million", "casualties", "deadliest"],
+    "difficulty": "medium",
+    "type": "comparison"
+  },
+  {
+    "question": "How many parameters did GPT-3 have?",
+    "expected_answer": "GPT-3 had 175 billion parameters.",
+    "relevant_keywords": ["GPT-3", "175 billion", "parameters"],
+    "difficulty": "easy",
+    "type": "numerical"
+  },
+  {
+    "question": "What is the current atmospheric CO2 concentration, and what was it before industrialization?",
+    "expected_answer": "Before the industrial era (approximately 1750), atmospheric CO2 was about 280 parts per million (ppm). It has since risen to over 420 ppm — a level not seen in at least 800,000 years.",
+    "relevant_keywords": ["CO2", "280 ppm", "420 ppm", "pre-industrial", "800,000 years"],
+    "difficulty": "medium",
+    "type": "numerical"
+  },
+  {
+    "question": "How many neurons does the human brain contain, and how many synapses?",
+    "expected_answer": "The human brain contains approximately 86 billion neurons, with an estimated 100–500 trillion synaptic connections.",
+    "relevant_keywords": ["86 billion", "neurons", "100-500 trillion", "synapses", "brain"],
+    "difficulty": "medium",
+    "type": "numerical"
+  },
+  {
+    "question": "What is the diameter of the observable universe?",
+    "expected_answer": "The observable universe spans approximately 93 billion light-years in diameter and contains an estimated 2 trillion galaxies.",
+    "relevant_keywords": ["93 billion light-years", "observable universe", "2 trillion galaxies"],
+    "difficulty": "medium",
+    "type": "numerical"
+  },
+  {
+    "question": "What percentage of Earth's land surface do tropical rainforests cover, and what percentage of species do they contain?",
+    "expected_answer": "Tropical rainforests cover only 6–7% of Earth's land surface but contain over 50% of the world's plant and animal species.",
+    "relevant_keywords": ["tropical rainforests", "6-7%", "50%", "species", "biodiversity"],
+    "difficulty": "medium",
+    "type": "numerical"
+  },
+  {
+    "question": "Why was GPT-2 initially withheld from public release?",
+    "expected_answer": "GPT-2 was initially withheld due to concerns about potential misuse of its powerful text generation capabilities, reflecting OpenAI's caution about releasing a model capable of generating convincing misinformation or harmful content at scale.",
+    "relevant_keywords": ["GPT-2", "withheld", "misuse", "concerns", "text generation"],
+    "difficulty": "medium",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why did the first AI Winter occur?",
+    "expected_answer": "The first AI Winter (1974–1980) occurred because researchers failed to deliver on overly ambitious promises. Funding dried up, and reports like the UK's Lighthill Report (1973) criticized the field for its inability to produce useful results, damaging confidence and investment in AI research.",
+    "relevant_keywords": ["AI Winter", "1974", "1980", "Lighthill Report", "funding", "promises", "overly ambitious"],
+    "difficulty": "medium",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why does the Amazon rainforest risk becoming a carbon source rather than a carbon sink?",
+    "expected_answer": "The Amazon rainforest risks transitioning from a carbon sink to a carbon source because of a 'flying rivers' feedback: deforestation reduces the forest's ability to generate its own rainfall. At 20–25% deforestation (currently at ~17%), the forest may no longer sustain itself, releasing stored carbon and accelerating global warming.",
+    "relevant_keywords": ["Amazon", "carbon sink", "carbon source", "flying rivers", "deforestation", "tipping point", "20-25%"],
+    "difficulty": "hard",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why did the Treaty of Versailles contribute to the rise of World War II?",
+    "expected_answer": "The Treaty of Versailles (1919) imposed punitive reparations on Germany, contributing to economic instability in Germany. This instability and national humiliation created conditions that facilitated the rise of Nazism and ultimately contributed to the outbreak of World War II.",
+    "relevant_keywords": ["Treaty of Versailles", "1919", "reparations", "Germany", "economic instability", "Nazism", "World War II"],
+    "difficulty": "medium",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why is the human brain considered energetically expensive relative to its size?",
+    "expected_answer": "The human brain consumes approximately 20% of the body's total energy despite comprising only about 2% of body weight. This disproportionate energy use is due to the constant metabolic demands of maintaining billions of neurons and trillions of synapses, requiring a continuous supply of oxygen and glucose.",
+    "relevant_keywords": ["brain", "20%", "energy", "2%", "body weight", "neurons", "oxygen", "glucose"],
+    "difficulty": "medium",
+    "type": "reasoning"
+  },
+  {
+    "question": "How did the development of the Transformer architecture contribute to the evolution of GPT models from GPT-1 to GPT-4?",
+    "expected_answer": "The Transformer architecture, introduced by Vaswani et al. in 2017, provided the self-attention mechanism that enabled scalable, parallelized processing of language. GPT-1 (2018) first applied this with 117 million parameters. GPT-2 (2019) scaled to 1.5 billion parameters. GPT-3 (2020) scaled massively to 175 billion parameters, enabling few-shot learning. GPT-4 (2023) extended the architecture further to support multimodal inputs. Each iteration relied on the Transformer's attention mechanism to handle increasingly complex tasks.",
+    "relevant_keywords": ["Transformer", "self-attention", "GPT-1", "GPT-2", "GPT-3", "GPT-4", "parameters", "scaling", "multimodal"],
+    "difficulty": "hard",
+    "type": "multi-hop"
+  },
+  {
+    "question": "How does the process from DNA to protein production relate to cellular function in the human body?",
+    "expected_answer": "DNA in the cell nucleus is transcribed into pre-mRNA by RNA polymerase II. The pre-mRNA is processed (splicing, capping, polyadenylation) into mature mRNA, which is then translated by ribosomes into polypeptide chains using tRNA molecules to incorporate amino acids. These proteins carry out virtually all cellular functions — structural, enzymatic, signaling — enabling the specialized roles of the body's approximately 37 trillion cells.",
+    "relevant_keywords": ["DNA", "mRNA", "transcription", "translation", "ribosomes", "protein", "tRNA", "codons", "gene expression"],
+    "difficulty": "hard",
+    "type": "multi-hop"
+  },
+  {
+    "question": "How did deforestation and climate tipping points interact to threaten the Amazon's role in the global carbon cycle?",
+    "expected_answer": "Deforestation (currently ~17% of the Amazon) disrupts the 'flying rivers' rainfall feedback, potentially pushing the forest toward a tipping point at 20–25% deforestation. Beyond this threshold, the Amazon could transition from a carbon sink to a carbon source, releasing stored CO2 into the atmosphere, further accelerating global warming, which in turn can drive more extreme drought events that cause additional forest dieback — a self-reinforcing cycle.",
+    "relevant_keywords": ["Amazon", "deforestation", "tipping point", "carbon sink", "carbon source", "flying rivers", "global warming", "feedback"],
+    "difficulty": "hard",
+    "type": "multi-hop"
+  },
+  {
+    "question": "How did the fall of Lehman Brothers connect mortgage-backed securities to a global economic crisis?",
+    "expected_answer": "Loose lending standards in the US housing market created large volumes of subprime mortgages, which were packaged into mortgage-backed securities (MBS) and CDOs and sold globally. When US house prices fell and defaults surged, these securities lost value, causing massive losses at financial institutions including Lehman Brothers. Lehman's collapse on September 15, 2008 triggered a global credit freeze, forcing governments to intervene with hundreds of billions in bailouts and causing approximately 30 million job losses worldwide.",
+    "relevant_keywords": ["Lehman Brothers", "mortgage-backed securities", "MBS", "subprime", "credit freeze", "2008", "TARP", "job losses"],
+    "difficulty": "hard",
+    "type": "multi-hop"
+  },
+  {
+    "question": "How does the adaptive immune system's memory mechanism form the basis for vaccination?",
+    "expected_answer": "When the adaptive immune system first encounters an antigen, B and T lymphocytes specific to that antigen proliferate and some become long-lived memory cells. Upon re-exposure to the same antigen, these memory cells enable a faster and stronger response that typically prevents disease. Vaccines exploit this by introducing an antigen (or instructions to produce one) without causing illness, so that if the actual pathogen is encountered later, the immune memory cells can mount a rapid protective response.",
+    "relevant_keywords": ["adaptive immunity", "memory cells", "B cells", "T cells", "vaccination", "antigen", "immune memory", "re-exposure"],
+    "difficulty": "hard",
+    "type": "multi-hop"
+  },
+  {
+    "question": "Who won the FIFA World Cup in 2022?",
+    "expected_answer": "This question is outside the scope of the knowledge base document. The document covers topics such as AI, climate science, biology, history, economics, physics, philosophy, computer science, literature, and environmental science. It does not contain information about sports events.",
+    "relevant_keywords": ["FIFA", "World Cup", "2022", "out-of-scope"],
+    "difficulty": "easy",
+    "type": "out-of-context"
+  },
+  {
+    "question": "What is the recipe for making sourdough bread?",
+    "expected_answer": "This question is outside the scope of the knowledge base document, which covers AI/ML, climate science, biology, history, economics, physics, philosophy, computer science, literature, and environmental science. Cooking recipes are not covered.",
+    "relevant_keywords": ["sourdough", "bread", "recipe", "out-of-scope"],
+    "difficulty": "easy",
+    "type": "out-of-context"
+  },
+  {
+    "question": "Who is the current CEO of Tesla?",
+    "expected_answer": "This question is outside the scope of the knowledge base document. The document does not contain information about current corporate leadership positions or contemporary business news.",
+    "relevant_keywords": ["Tesla", "CEO", "Elon Musk", "out-of-scope"],
+    "difficulty": "easy",
+    "type": "out-of-context"
+  },
+  {
+    "question": "What are the top-grossing movies of 2024?",
+    "expected_answer": "This question is outside the scope of the knowledge base document. The document covers academic and scientific topics but does not include information about entertainment industry data, box office results, or film releases.",
+    "relevant_keywords": ["movies", "2024", "box office", "grossing", "out-of-scope"],
+    "difficulty": "easy",
+    "type": "out-of-context"
+  },
+  {
+    "question": "What is the current price of Bitcoin?",
+    "expected_answer": "This question is outside the scope of the knowledge base document. While the document covers financial markets and the 2008 financial crisis, it does not contain real-time pricing data for cryptocurrencies or other financial assets.",
+    "relevant_keywords": ["Bitcoin", "price", "cryptocurrency", "real-time", "out-of-scope"],
+    "difficulty": "easy",
+    "type": "out-of-context"
+  }
+]

@@ -1,0 +1,202 @@
+{
+  "summary": {
+    "total_questions": 50,
+    "average_similarity": 0.7973182343301319,
+    "average_keyword_match": 0.6712585034013605,
+    "similarity_accuracy": 36.0,
+    "keyword_accuracy": 32.0,
+    "overall_score": 34.0,
+    "evaluation_time_sec": 375.60749077796936
+  },
+  "results": [
+    {
+      "question": "Who developed GPT?",
+      "expected": "GPT (Generative Pre-trained Transformer) was developed by OpenAI.",
+      "generated": "OpenAI (Page -1).",
+      "similarity": 0.3874387741088867,
+      "keyword_match": 0.3333333333333333,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What capability was introduced in GPT-4?",
+      "expected": "GPT-4 introduced multimodal capabilities, processing both text and images.",
+      "generated": "GPT-4 introduced multimodal capabilities, processing both text and images (Page -1).",
+      "similarity": 0.97179114818573,
+      "keyword_match": 1.0,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is Retrieval-Augmented Generation (RAG)?",
+      "expected": "RAG is an architectural pattern that enhances LLMs by coupling them with external knowledge retrieval, retrieving relevant documents from a vector database at inference time and feeding them as context to the generator.",
+      "generated": "Retrieval-Augmented Generation (RAG) is \"an architectural pattern that enhances LLMs by coupling them with external knowledge retrieval\" (Page -1). Instead of relying solely on parametric knowledge encoded during training, RAG systems retrieve relevant documents from a vector database at inference time and feed them as context to the generator (Page -1).",
+      "similarity": 0.842557430267334,
+      "keyword_match": 0.8333333333333334,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is the Transformer architecture based on?",
+      "expected": "The Transformer architecture is based on a self-attention mechanism that weighs the relevance of each word in a sentence against every other word, enabling nuanced contextual understanding.",
+      "generated": "I don't know based on the provided document.",
+      "similarity": 0.06868849694728851,
+      "keyword_match": 0.0,
+      "difficulty": "medium",
+      "type": "fact"
+    },
+    {
+      "question": "When was the Dartmouth Conference that formally established AI as a discipline?",
+      "expected": "The Dartmouth Conference was held in 1956, where AI was established as a formal academic discipline.",
+      "generated": "The Dartmouth Conference was in 1956 (Page -1).",
+      "similarity": 0.7938907146453857,
+      "keyword_match": 0.4,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is BERT and who released it?",
+      "expected": "BERT (Bidirectional Encoder Representations from Transformers) was released by Google in 2018. It introduced bidirectional pre-training, reading text from both left-to-right and right-to-left simultaneously.",
+      "generated": "BERT (Bidirectional Encoder Representations from Transformers) is a model that introduced bidirectional pre-training, reading text from left-to-right and right-to-left simultaneously. It was released by Google in 2018 (Page -1).",
+      "similarity": 0.9431250095367432,
+      "keyword_match": 1.0,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What does the greenhouse effect do to Earth's temperature?",
+      "expected": "The greenhouse effect warms Earth's surface by trapping heat. Without it, Earth's average temperature would be approximately -18°C rather than the current +15°C.",
+      "generated": "The greenhouse effect warms Earth's surface, keeping the average temperature at approximately +15°C rather than -18°C (Page -1).",
+      "similarity": 0.9553136229515076,
+      "keyword_match": 0.6666666666666666,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What writing system did the Sumerians develop?",
+      "expected": "The Sumerians developed cuneiform, the world's earliest known writing system, originally used for administrative record-keeping.",
+      "generated": "The Sumerians developed cuneiform (Page -1).",
+      "similarity": 0.7790687084197998,
+      "keyword_match": 0.5,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What caused the 2008 Global Financial Crisis?",
+      "expected": "The 2008 Global Financial Crisis originated in the US housing market, driven by loose lending standards, financial innovation (mortgage-backed securities and collateralized debt obligations), excessive leverage, and regulatory failures. When US house prices fell and subprime mortgage defaults surged, institutions holding mortgage-backed securities suffered massive losses.",
+      "generated": "The 2008 Global Financial Crisis originated in the US housing market, caused by \"years of loose lending standards, financial innovation (particularly mortgage-backed securities and collateralized debt obligations), excessive leverage, and regulatory failures\" (Page -1). The crisis was triggered when US house prices began falling in 2006–2007 and subprime mortgage defaults surged, leading to massive losses for financial institutions holding mortgage-backed securities (Page -1).",
+      "similarity": 0.9666658639907837,
+      "keyword_match": 0.8333333333333334,
+      "difficulty": "medium",
+      "type": "fact"
+    },
+    {
+      "question": "Who invented the World Wide Web and where?",
+      "expected": "Tim Berners-Lee invented the World Wide Web at CERN in 1989, adding HTTP, HTML, and URLs to create a global hyperlinked document system.",
+      "generated": "Tim Berners-Lee invented the World Wide Web at CERN (Page -1).",
+      "similarity": 0.8852664232254028,
+      "keyword_match": 0.5,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is neuroplasticity?",
+      "expected": "Neuroplasticity is the brain's ability to reorganize itself by forming new neural connections throughout life, underlying learning, memory, and recovery from injury.",
+      "generated": "Neuroplasticity is \"the brain's ability to reorganize itself by forming new neural connections throughout life\" and it \"underlies learning, memory, and recovery from injury\" (Page -1).",
+      "similarity": 0.9762895107269287,
+      "keyword_match": 1.0,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is Kant's categorical imperative?",
+      "expected": "Kant's categorical imperative states: 'Act only according to that maxim by which you can at the same time will that it should become a universal law.' He also formulated the principle of treating persons always as ends in themselves, never merely as means.",
+      "generated": "Kant's categorical imperative states: \"Act only according to that maxim by which you can at the same time will that it should become a universal law.\" (Page -1)",
+      "similarity": 0.8794723153114319,
+      "keyword_match": 0.6,
+      "difficulty": "medium",
+      "type": "fact"
+    },
+    {
+      "question": "What is the Big Bang theory?",
+      "expected": "The Big Bang theory describes the origin of the universe from an extremely hot, dense state approximately 13.8 billion years ago. Evidence includes the cosmic microwave background radiation and the observed expansion of the universe.",
+      "generated": "The Big Bang theory describes the origin of the universe from an extremely hot, dense state approximately 13.8 billion years ago (Page -1).",
+      "similarity": 0.9533674120903015,
+      "keyword_match": 0.4,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "What is long-term potentiation (LTP)?",
+      "expected": "Long-term potentiation (LTP) is a persistent strengthening of synapses based on activity patterns, considered the primary cellular mechanism of learning and memory. It was first described by Timothy Bliss and Terje Lomo in 1973 in the hippocampus.",
+      "generated": "Long-term potentiation (LTP) is \"a persistent strengthening of synapses based on activity patterns\" and is \"considered the primary cellular mechanism of learning and memory\" (Page -1).",
+      "similarity": 0.9677232503890991,
+      "keyword_match": 0.8333333333333334,
+      "difficulty": "medium",
+      "type": "fact"
+    },
+    {
+      "question": "What is the Unix operating system and who created it?",
+      "expected": "Unix is an operating system created by Ken Thompson and Dennis Ritchie at Bell Labs in 1969. It pioneered a hierarchical file system, multitasking, and inter-process communication via pipes.",
+      "generated": "The Unix operating system, created by Ken Thompson and Dennis Ritchie at Bell Labs in 1969, pioneered a hierarchical file system, multitasking, and inter-process communication via pipes (Page -1).",
+      "similarity": 0.9397110342979431,
+      "keyword_match": 1.0,
+      "difficulty": "easy",
+      "type": "fact"
+    },
+    {
+      "question": "Compare GPT-3 and GPT-4 in terms of capabilities and parameters.",
+      "expected": "GPT-3 (2020) had 175 billion parameters and demonstrated remarkable few-shot learning capabilities. GPT-4 (2023) extended this by introducing multimodal capabilities, able to process both text and images, representing a significant leap beyond GPT-3's text-only processing.",
+      "generated": "GPT-3 has 175 billion parameters and demonstrated remarkable few-shot learning capabilities, whereas GPT-4 introduced multimodal capabilities, processing both text and images (Page -1). The parameter count for GPT-4 is not mentioned in the provided document.",
+      "similarity": 0.914958655834198,
+      "keyword_match": 0.75,
+      "difficulty": "medium",
+      "type": "comparison"
+    },
+    {
+      "question": "Compare supervised learning and unsupervised learning.",
+      "expected": "Supervised learning trains on labeled data to map inputs to known outputs (e.g., spam detection, image classification). Unsupervised learning finds hidden patterns in unlabeled data using techniques like clustering (k-means) and dimensionality reduction (PCA). The key difference is whether training data is labeled.",
+      "generated": "Based on the provided document:\n\n* **Supervised Learning**: The algorithm learns from \"labeled training data, mapping inputs to known outputs\" (Page -1). It uses algorithms such as linear regression, decision trees, and neural networks for applications like spam detection, image classification, and medical diagnosis (Page -1).\n* **Unsupervised Learning**: The algorithm \"discovers hidden patterns in unlabeled data\" (Page -1). It utilizes clustering algorithms (such as k-means and DBSCAN) to group similar data points, and dimensionality reduction techniques (such as PCA and autoencoders) to find compact representations (Page -1).",
+      "similarity": 0.7492434978485107,
+      "keyword_match": 1.0,
+      "difficulty": "medium",
+      "type": "comparison"
+    },
+    {
+      "question": "Compare innate immunity and adaptive immunity.",
+      "expected": "Innate immunity is the first line of defense, responding rapidly (minutes to hours) using physical barriers and cellular components like macrophages, recognizing broad pathogen patterns. Adaptive immunity is slower (days to weeks) but highly specific and long-lasting, involving B and T lymphocytes that provide immunological memory for future exposures.",
+      "generated": "Based on the provided document:\n\n* **Response Time:** Innate immunity is the first line of defense and responds rapidly within minutes to hours, whereas adaptive immunity is slower to develop, taking days to weeks (Page -1).\n* **Specificity:** Innate immunity recognizes broad patterns associated with pathogens through pattern recognition receptors (PRRs), while adaptive immunity provides highly specific, long-lasting protection (Page -1).\n* **Components:** Innate immunity involves physical barriers (skin, mucous membranes), cellular components (neutrophils, macrophages, natural killer cells, dendritic cells),",
+      "similarity": 0.808922290802002,
+      "keyword_match": 0.5714285714285714,
+      "difficulty": "medium",
+      "type": "comparison"
+    },
+    {
+      "question": "Compare Keynesian and Classical economics.",
+      "expected": "Classical economics (Adam Smith) argues free markets guided by the 'invisible hand' efficiently allocate resources without central coordination. Keynesian economics (John Maynard Keynes) argues that aggregate demand drives output and that government intervention via fiscal and monetary policy is necessary to stabilize economies, especially during downturns like the Great Depression.",
+      "generated": "Classical economics, developed by Adam Smith, argues that free markets guided by the \"invisible hand\" of price mechanisms allocate resources efficiently without central coordination (Page -1). \n\nIn contrast, Keynesian economics, developed by John Maynard Keynes, argues that aggregate demand drives economic output and that government intervention—through fiscal and monetary policy—can stabilize economies (Page -1).",
+      "similarity": 0.9574218988418579,
+      "keyword_match": 1.0,
+      "difficulty": "medium",
+      "type": "comparison"
+    },
+    {
+      "question": "Compare BERT and GPT in their pre-training approach.",
+      "expected": "BERT uses bidirectional pre-training, reading text from both left-to-right and right-to-left simultaneously, making it better for understanding tasks like question answering and sentiment analysis. GPT uses unidirectional (left-to-right) pre-training, making it better suited for text generation tasks.",
+      "generated": "I don't know based on the provided document.",
+      "similarity": 0.08228172361850739,
+      "keyword_match": 0.0,
+      "difficulty": "hard",
+      "type": "comparison"
+    },
+    {
+      "question": "Compare Special and General Relativity.",
+      "expected": "Special Relativity (1905) applies to observers in uniform motion and introduced time dilation, length contraction, and mass-energy equivalence (E=mc²). General Relativity (1915) extended these to accelerating frames, reinterpreting gravity as the curvature of spacetime caused by mass and energy rather than a force.",
+      "generated": "Special Relativity (1905) applies to observers in uniform motion, postulating that the laws of physics are the same for all such observers and that the speed of light is constant, which leads to time dilation, length contraction, and mass-energy equivalence (Page -1). \n\nIn contrast, General Relativity (1915) extends these principles to accelerating frames and gravity, reinterpreting gravity not as a force but as the curvature of spacetime caused by mass and energy (Page -1).",
+      "similarity": 0.9204851388931274,
+      "keyword_match": 0.875,
+      "difficulty": "medium",
+      "type": "comparison"
+    }
+  ]
+}

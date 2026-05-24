@@ -1,0 +1,102 @@
+[
+  {
+    "question": "Who developed GPT?",
+    "expected_answer": "GPT (Generative Pre-trained Transformer) was developed by OpenAI.",
+    "type": "fact"
+  },
+  {
+    "question": "What capability was introduced in GPT-4?",
+    "expected_answer": "GPT-4 introduced multimodal capabilities, processing both text and images.",
+    "type": "fact"
+  },
+  {
+    "question": "What is Retrieval-Augmented Generation (RAG)?",
+    "expected_answer": "RAG is an architectural pattern that enhances LLMs by coupling them with external knowledge retrieval.",
+    "type": "fact"
+  },
+  {
+    "question": "What is BERT and who released it?",
+    "expected_answer": "BERT was released by Google in 2018 and introduced bidirectional pre-training.",
+    "type": "fact"
+  },
+  {
+    "question": "Who invented the World Wide Web and where?",
+    "expected_answer": "Tim Berners-Lee invented the World Wide Web at CERN in 1989.",
+    "type": "fact"
+  },
+  {
+    "question": "What is neuroplasticity?",
+    "expected_answer": "Neuroplasticity is the brain's ability to reorganize itself by forming new neural connections.",
+    "type": "fact"
+  },
+  {
+    "question": "What is the Big Bang theory?",
+    "expected_answer": "The Big Bang theory states that the universe originated from an extremely hot and dense state around 13.8 billion years ago.",
+    "type": "fact"
+  },
+  {
+    "question": "What is utilitarianism?",
+    "expected_answer": "Utilitarianism is the ethical theory that the best action is the one producing the greatest good for the greatest number.",
+    "type": "fact"
+  },
+  {
+    "question": "Compare GPT-3 and GPT-4 in terms of capabilities and parameters.",
+    "expected_answer": "GPT-3 had 175 billion parameters and enabled few-shot learning, while GPT-4 introduced multimodal capabilities for processing text and images.",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare supervised learning and unsupervised learning.",
+    "expected_answer": "Supervised learning uses labeled data, while unsupervised learning identifies hidden patterns in unlabeled data.",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare BERT and GPT in their pre-training approach.",
+    "expected_answer": "BERT uses bidirectional pre-training while GPT uses left-to-right autoregressive pre-training.",
+    "type": "comparison"
+  },
+  {
+    "question": "Compare RNNs and Transformers for NLP tasks.",
+    "expected_answer": "RNNs process sequences step-by-step, while Transformers use self-attention and parallel processing for better long-range dependency handling.",
+    "type": "comparison"
+  },
+  {
+    "question": "How many parameters did GPT-3 have?",
+    "expected_answer": "GPT-3 had 175 billion parameters.",
+    "type": "numerical"
+  },
+  {
+    "question": "What is the current atmospheric CO2 concentration, and what was it before industrialization?",
+    "expected_answer": "Atmospheric CO2 increased from about 280 ppm before industrialization to over 420 ppm today.",
+    "type": "numerical"
+  },
+  {
+    "question": "What is the diameter of the observable universe?",
+    "expected_answer": "The observable universe is approximately 93 billion light-years in diameter.",
+    "type": "numerical"
+  },
+  {
+    "question": "Why was GPT-2 initially withheld from public release?",
+    "expected_answer": "GPT-2 was initially withheld because of concerns about misuse and harmful text generation.",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why did the first AI Winter occur?",
+    "expected_answer": "The first AI Winter occurred due to failed promises, reduced funding, and criticism of AI research progress.",
+    "type": "reasoning"
+  },
+  {
+    "question": "Why did the Treaty of Versailles contribute to the rise of World War II?",
+    "expected_answer": "The Treaty of Versailles imposed harsh reparations on Germany, causing instability that contributed to the rise of Nazism.",
+    "type": "reasoning"
+  },
+  {
+    "question": "How did the development of the Transformer architecture contribute to the evolution of GPT models from GPT-1 to GPT-4?",
+    "expected_answer": "The Transformer architecture enabled scalable self-attention mechanisms that allowed GPT models to evolve from GPT-1 to multimodal GPT-4.",
+    "type": "multi-hop"
+  },
+  {
+    "question": "What is the current price of Bitcoin?",
+    "expected_answer": "This question is outside the scope of the knowledge base document.",
+    "type": "out-of-context"
+  }
+]
