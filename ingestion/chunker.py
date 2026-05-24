@@ -32,7 +32,6 @@ class Chunker:
             text
         )
 
-        # remove empty/tiny junk
         cleaned = [
             s.strip()
             for s in sentences
@@ -57,7 +56,6 @@ class Chunker:
 
             sentence = sentence.strip()
 
-            # start fresh at chapter boundaries
             if re.search(
                 r"^Chapter\s+\d+",
                 sentence,

@@ -14,7 +14,6 @@ def reciprocal_rank_fusion(
 
     scores: dict[str, float] = {}
 
-    # Keep strongest candidates only
     dense_results = dense_results[:10]
     sparse_results = sparse_results[:10]
 
@@ -36,13 +35,11 @@ def reciprocal_rank_fusion(
                 + rrf_score
             )
 
-    # Dense semantic retrieval gets slightly more importance
     _accumulate(
         dense_results,
         source_weight=1.2
     )
 
-    # Sparse exact keyword matching
     _accumulate(
         sparse_results,
         source_weight=1.0
