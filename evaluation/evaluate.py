@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import json
-import requests
 import time
+import requests
 import numpy as np
 
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-
 
 # ============================================================
 # CONFIG
@@ -15,70 +14,67 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 API_URL = "http://127.0.0.1:8000/query"
 
-DATASET_PATH = "dataset.json"
+DATASET_PATH = "test_dataset.json"
 
-SIMILARITY_THRESHOLD = 0.65
-
-REQUEST_DELAY = 10
-
+EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 # ============================================================
-# LOAD EMBEDDING MODEL
+# LOAD MODEL
 # ============================================================
 
-print("\n🟢 Loading evaluation embedding model...\n")
+print("🟢 Loading evaluation embedding model...")
 
-embedding_model = SentenceTransformer(
-    "sentence-transformers/all-MiniLM-L6-v2"
+embedder = SentenceTransformer(
+    EMBED_MODEL
 )
-
 
 # ============================================================
 # LOAD DATASET
 # ============================================================
 
-with open(DATASET_PATH, "r", encoding="utf-8") as f:
+with open(
+    DATASET_PATH,
+    "r",
+    encoding="utf-8"
+) as f:
+
     dataset = json.load(f)
 
-print(f"🟢 Loaded {len(dataset)} evaluation samples\n")
-
+print(
+    f"🟢 Loaded {len(dataset)} evaluation samples"
+)
 
 # ============================================================
 # METRICS STORAGE
 # ============================================================
 
-total_questions = len(dataset)
+semantic_scores = []
+exact_matches = []
+response_times = []
+length_ratios = []
 
-correct_answers = 0
-
-faithful_answers = 0
-
-relevant_answers = 0
-
-similarity_scores = []
-
+successful_queries = 0
 
 # ============================================================
 # EVALUATION LOOP
 # ============================================================
 
-for idx, sample in enumerate(dataset, start=1):
+for idx, sample in enumerate(
+    dataset,
+    start=1
+):
 
     question = sample["question"]
+    expected = sample["expected_answer"]
 
-    expected_answer = sample["expected_answer"]
-
-    print("\n===================================================")
-
+    print("\n")
+    print("=" * 60)
     print(f"QUESTION {idx}")
+    print("=" * 60)
 
-    print("===================================================\n")
+    print(f"\nQ: {question}")
 
-    print(f"Q: {question}\n")
-
-    # --------------------------------------------------------
-    # CALL API
-    # --------------------------------------------------------
+    start_time = time.time()
 
     try:
 
@@ -86,171 +82,206 @@ for idx, sample in enumerate(dataset, start=1):
             API_URL,
             json={
                 "question": question
-            }
+            },
+            timeout=120
         )
+
+        elapsed = (
+            time.time() - start_time
+        )
+
+        response_times.append(
+            elapsed
+        )
+
+        predicted = response.json().get(
+            "answer",
+            ""
+        )
+
+        successful_queries += 1
 
     except Exception as e:
 
-        print(f"❌ Request Failed: {e}")
-
-        continue
-
-    # --------------------------------------------------------
-    # CHECK RESPONSE
-    # --------------------------------------------------------
-
-    if response.status_code != 200:
-
         print(
-            f"❌ API ERROR: {response.status_code}"
+            f"❌ Request Failed: {e}"
         )
 
-        print(response.text)
-
         continue
 
-    try:
+    print("\nEXPECTED:")
+    print(expected)
 
-        result = response.json()
+    print("\nPREDICTED:")
+    print(predicted)
 
-    except Exception:
+    # ========================================================
+    # EXACT MATCH
+    # ========================================================
 
-        print("❌ Invalid JSON response")
-
-        print(response.text)
-
-        continue
-
-    predicted_answer = result.get(
-        "answer",
-        ""
+    em = int(
+        expected.strip().lower()
+        ==
+        predicted.strip().lower()
     )
 
-    print(f"EXPECTED:\n{expected_answer}\n")
+    exact_matches.append(em)
 
-    print(f"PREDICTED:\n{predicted_answer}\n")
-
-    # --------------------------------------------------------
+    # ========================================================
     # SEMANTIC SIMILARITY
-    # --------------------------------------------------------
+    # ========================================================
 
-    expected_embedding = embedding_model.encode(
-        [expected_answer]
-    )
+    expected_emb = embedder.encode(
+        expected
+    ).reshape(1, -1)
 
-    predicted_embedding = embedding_model.encode(
-        [predicted_answer]
-    )
+    predicted_emb = embedder.encode(
+        predicted
+    ).reshape(1, -1)
 
     similarity = cosine_similarity(
-        expected_embedding,
-        predicted_embedding
+        expected_emb,
+        predicted_emb
     )[0][0]
 
-    similarity_scores.append(similarity)
-
-    print(f"Semantic Similarity: {similarity:.4f}")
-
-    # --------------------------------------------------------
-    # ACCURACY
-    # --------------------------------------------------------
-
-    if similarity >= SIMILARITY_THRESHOLD:
-
-        correct_answers += 1
-
-        print("✅ Correct")
-
-    else:
-
-        print("❌ Incorrect")
-
-    # --------------------------------------------------------
-    # ANSWER RELEVANCE
-    # --------------------------------------------------------
-
-    if similarity >= 0.60:
-
-        relevant_answers += 1
-
-    # --------------------------------------------------------
-    # FAITHFULNESS
-    # --------------------------------------------------------
-
-    hallucination_phrases = [
-        "i think",
-        "maybe",
-        "probably",
-        "might be",
-        "possibly"
-    ]
-
-    hallucinated = any(
-        phrase in predicted_answer.lower()
-        for phrase in hallucination_phrases
+    semantic_scores.append(
+        similarity
     )
 
-    if not hallucinated:
+    # ========================================================
+    # LENGTH RATIO
+    # ========================================================
 
-        faithful_answers += 1
+    expected_len = max(
+        len(expected.split()),
+        1
+    )
 
-    # --------------------------------------------------------
-    # DELAY
-    # --------------------------------------------------------
+    predicted_len = len(
+        predicted.split()
+    )
 
-    time.sleep(REQUEST_DELAY)
+    ratio = (
+        predicted_len
+        /
+        expected_len
+    )
 
+    length_ratios.append(
+        ratio
+    )
+
+    print(
+        f"\nSemantic Similarity: "
+        f"{similarity:.4f}"
+    )
+
+    print(
+        f"Exact Match: "
+        f"{em}"
+    )
+
+    print(
+        f"Response Time: "
+        f"{elapsed:.2f}s"
+    )
 
 # ============================================================
-# FINAL METRICS
+# FINAL REPORT
 # ============================================================
 
-accuracy = (
-    correct_answers / total_questions
+print("\n")
+print("=" * 70)
+print("FINAL EVALUATION REPORT")
+print("=" * 70)
+
+total_questions = len(dataset)
+
+success_rate = (
+    successful_queries
+    /
+    total_questions
 ) * 100
 
 avg_similarity = (
-    np.mean(similarity_scores)
-) * 100
+    np.mean(semantic_scores)
+    if semantic_scores
+    else 0
+)
 
-faithfulness = (
-    faithful_answers / total_questions
-) * 100
+avg_exact_match = (
+    np.mean(exact_matches)
+    if exact_matches
+    else 0
+)
 
-answer_relevance = (
-    relevant_answers / total_questions
-) * 100
+avg_response_time = (
+    np.mean(response_times)
+    if response_times
+    else 0
+)
 
+avg_length_ratio = (
+    np.mean(length_ratios)
+    if length_ratios
+    else 0
+)
+
+print(
+    f"\nTotal Questions: "
+    f"{total_questions}"
+)
+
+print(
+    f"Successful Queries: "
+    f"{successful_queries}"
+)
+
+print(
+    f"Success Rate: "
+    f"{success_rate:.2f}%"
+)
+
+print(
+    f"\nAverage Semantic Similarity: "
+    f"{avg_similarity:.4f}"
+)
+
+print(
+    f"Average Exact Match: "
+    f"{avg_exact_match:.4f}"
+)
+
+print(
+    f"Average Response Time: "
+    f"{avg_response_time:.2f}s"
+)
+
+print(
+    f"Average Length Ratio: "
+    f"{avg_length_ratio:.2f}"
+)
+
+print("\n")
 
 # ============================================================
-# RESULTS
+# INTERPRETATION
 # ============================================================
 
-print("\n\n===================================================")
+print("INTERPRETATION")
 
-print(" FINAL EVALUATION RESULTS ")
+if avg_similarity >= 0.90:
+    print("🟢 Excellent semantic quality")
+elif avg_similarity >= 0.80:
+    print("🟢 Very good semantic quality")
+elif avg_similarity >= 0.70:
+    print("🟡 Acceptable semantic quality")
+else:
+    print("🔴 Poor semantic quality")
 
-print("===================================================\n")
-
-print(f"Total Questions        : {total_questions}")
-
-print(f"Correct Answers        : {correct_answers}")
-
-print(f"Accuracy               : {accuracy:.2f}%")
-
-print(
-    f"Average Semantic Score : "
-    f"{avg_similarity:.2f}%"
-)
-
-print(
-    f"Faithfulness Score     : "
-    f"{faithfulness:.2f}%"
-)
-
-print(
-    f"Answer Relevance       : "
-    f"{answer_relevance:.2f}%"
-)
-
-print("\n===================================================\n")
+if avg_response_time <= 2:
+    print("🟢 Fast responses")
+elif avg_response_time <= 5:
+    print("🟡 Moderate responses")
+else:
+    print("🔴 Slow responses")
