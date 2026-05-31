@@ -1,102 +1,1362 @@
 [
   {
-    "question": "Who developed GPT?",
-    "expected_answer": "GPT (Generative Pre-trained Transformer) was developed by OpenAI.",
-    "type": "fact"
+    "question": "Explain the Turing Test and mention one major criticism of it.",
+    "expected_keywords": [
+      "Alan Turing",
+      "human",
+      "machine",
+      "Chinese Room",
+      "John Searle"
+    ]
   },
   {
-    "question": "What capability was introduced in GPT-4?",
-    "expected_answer": "GPT-4 introduced multimodal capabilities, processing both text and images.",
-    "type": "fact"
+    "question": "Describe the Dartmouth Conference and explain why it is important in AI history.",
+    "expected_keywords": [
+      "1956",
+      "John McCarthy",
+      "Marvin Minsky",
+      "Claude Shannon",
+      "Artificial Intelligence"
+    ]
   },
   {
-    "question": "What is Retrieval-Augmented Generation (RAG)?",
-    "expected_answer": "RAG is an architectural pattern that enhances LLMs by coupling them with external knowledge retrieval.",
-    "type": "fact"
+    "question": "What were the major contributions of the Logic Theorist program?",
+    "expected_keywords": [
+      "Logic Theorist",
+      "Allen Newell",
+      "Herbert Simon",
+      "Principia Mathematica",
+      "theorems"
+    ]
   },
   {
-    "question": "What is BERT and who released it?",
-    "expected_answer": "BERT was released by Google in 2018 and introduced bidirectional pre-training.",
-    "type": "fact"
+    "question": "Explain the Perceptron and the limitation identified by Minsky and Papert.",
+    "expected_keywords": [
+      "Frank Rosenblatt",
+      "Perceptron",
+      "Minsky",
+      "Papert",
+      "XOR"
+    ]
   },
   {
-    "question": "Who invented the World Wide Web and where?",
-    "expected_answer": "Tim Berners-Lee invented the World Wide Web at CERN in 1989.",
-    "type": "fact"
+    "question": "What were the main causes of the first AI winter?",
+    "expected_keywords": [
+      "Lighthill",
+      "1973",
+      "funding",
+      "machine translation",
+      "ALPAC"
+    ]
   },
   {
-    "question": "What is neuroplasticity?",
-    "expected_answer": "Neuroplasticity is the brain's ability to reorganize itself by forming new neural connections.",
-    "type": "fact"
+    "question": "Explain how machine learning differed from symbolic AI.",
+    "expected_keywords": [
+      "rules",
+      "symbolic",
+      "data",
+      "patterns",
+      "machine learning"
+    ]
   },
   {
-    "question": "What is the Big Bang theory?",
-    "expected_answer": "The Big Bang theory states that the universe originated from an extremely hot and dense state around 13.8 billion years ago.",
-    "type": "fact"
+    "question": "Why was AlexNet considered a breakthrough in AI?",
+    "expected_keywords": [
+      "AlexNet",
+      "ImageNet",
+      "2012",
+      "Geoffrey Hinton",
+      "GPU"
+    ]
   },
   {
-    "question": "What is utilitarianism?",
-    "expected_answer": "Utilitarianism is the ethical theory that the best action is the one producing the greatest good for the greatest number.",
-    "type": "fact"
+    "question": "Compare Narrow AI, AGI and ASI.",
+    "expected_keywords": [
+      "Narrow AI",
+      "AGI",
+      "ASI",
+      "specific task",
+      "human intelligence"
+    ]
   },
   {
-    "question": "Compare GPT-3 and GPT-4 in terms of capabilities and parameters.",
-    "expected_answer": "GPT-3 had 175 billion parameters and enabled few-shot learning, while GPT-4 introduced multimodal capabilities for processing text and images.",
-    "type": "comparison"
+    "question": "Discuss the major ethical concerns surrounding AI.",
+    "expected_keywords": [
+      "bias",
+      "fairness",
+      "privacy",
+      "accountability",
+      "transparency"
+    ]
   },
   {
-    "question": "Compare supervised learning and unsupervised learning.",
-    "expected_answer": "Supervised learning uses labeled data, while unsupervised learning identifies hidden patterns in unlabeled data.",
-    "type": "comparison"
+    "question": "Explain AI alignment and mention organizations working on it.",
+    "expected_keywords": [
+      "alignment",
+      "human values",
+      "MIRI",
+      "Anthropic",
+      "CHAI"
+    ]
   },
   {
-    "question": "Compare BERT and GPT in their pre-training approach.",
-    "expected_answer": "BERT uses bidirectional pre-training while GPT uses left-to-right autoregressive pre-training.",
-    "type": "comparison"
+    "question": "Describe the development of image generation systems in AI.",
+    "expected_keywords": [
+      "DALL-E",
+      "Stable Diffusion",
+      "Midjourney",
+      "text-to-image",
+      "diffusion"
+    ]
   },
   {
-    "question": "Compare RNNs and Transformers for NLP tasks.",
-    "expected_answer": "RNNs process sequences step-by-step, while Transformers use self-attention and parallel processing for better long-range dependency handling.",
-    "type": "comparison"
+    "question": "Explain the role of robotics in AI and provide examples.",
+    "expected_keywords": [
+      "robotics",
+      "Unimate",
+      "Atlas",
+      "ASIMO",
+      "Boston Dynamics"
+    ]
   },
   {
-    "question": "How many parameters did GPT-3 have?",
-    "expected_answer": "GPT-3 had 175 billion parameters.",
-    "type": "numerical"
+    "question": "Describe the evolution of machine translation technologies.",
+    "expected_keywords": [
+      "Georgetown",
+      "IBM",
+      "Google Translate",
+      "attention",
+      "transformer"
+    ]
   },
   {
-    "question": "What is the current atmospheric CO2 concentration, and what was it before industrialization?",
-    "expected_answer": "Atmospheric CO2 increased from about 280 ppm before industrialization to over 420 ppm today.",
-    "type": "numerical"
+    "question": "What factors contributed to the rise of deep learning?",
+    "expected_keywords": [
+      "data",
+      "GPU",
+      "computational power",
+      "algorithms",
+      "ImageNet"
+    ]
   },
   {
-    "question": "What is the diameter of the observable universe?",
-    "expected_answer": "The observable universe is approximately 93 billion light-years in diameter.",
-    "type": "numerical"
+    "question": "Explain the bias-variance tradeoff and its importance.",
+    "expected_keywords": [
+      "bias",
+      "variance",
+      "overfitting",
+      "underfitting",
+      "generalization"
+    ]
   },
   {
-    "question": "Why was GPT-2 initially withheld from public release?",
-    "expected_answer": "GPT-2 was initially withheld because of concerns about misuse and harmful text generation.",
-    "type": "reasoning"
+    "question": "Describe how Random Forest works and who introduced it.",
+    "expected_keywords": [
+      "Random Forest",
+      "Leo Breiman",
+      "bagging",
+      "trees",
+      "ensemble"
+    ]
   },
   {
-    "question": "Why did the first AI Winter occur?",
-    "expected_answer": "The first AI Winter occurred due to failed promises, reduced funding, and criticism of AI research progress.",
-    "type": "reasoning"
+    "question": "Explain Support Vector Machines and the kernel trick.",
+    "expected_keywords": [
+      "SVM",
+      "Vladimir Vapnik",
+      "hyperplane",
+      "kernel",
+      "margin"
+    ]
   },
   {
-    "question": "Why did the Treaty of Versailles contribute to the rise of World War II?",
-    "expected_answer": "The Treaty of Versailles imposed harsh reparations on Germany, causing instability that contributed to the rise of Nazism.",
-    "type": "reasoning"
+    "question": "Compare K-Means, DBSCAN and Hierarchical Clustering.",
+    "expected_keywords": [
+      "K-Means",
+      "DBSCAN",
+      "Hierarchical",
+      "clusters",
+      "density"
+    ]
   },
   {
-    "question": "How did the development of the Transformer architecture contribute to the evolution of GPT models from GPT-1 to GPT-4?",
-    "expected_answer": "The Transformer architecture enabled scalable self-attention mechanisms that allowed GPT models to evolve from GPT-1 to multimodal GPT-4.",
-    "type": "multi-hop"
+    "question": "Explain reinforcement learning and mention two important algorithms.",
+    "expected_keywords": [
+      "reinforcement learning",
+      "reward",
+      "Q-learning",
+      "REINFORCE",
+      "Bellman"
+    ]
   },
   {
-    "question": "What is the current price of Bitcoin?",
-    "expected_answer": "This question is outside the scope of the knowledge base document.",
-    "type": "out-of-context"
+    "question": "Describe the most important evaluation metrics for classification models.",
+    "expected_keywords": [
+      "accuracy",
+      "precision",
+      "recall",
+      "F1",
+      "ROC"
+    ]
+  },
+  {
+    "question": "Compare L1 and L2 regularization.",
+    "expected_keywords": [
+      "L1",
+      "L2",
+      "Lasso",
+      "Ridge",
+      "overfitting"
+    ]
+  },
+  {
+    "question": "Explain transfer learning and discuss its benefits.",
+    "expected_keywords": [
+      "transfer learning",
+      "pre-trained",
+      "fine-tuning",
+      "ImageNet",
+      "BERT"
+    ]
+  },
+  {
+    "question": "Describe AutoML and MLOps and explain their importance.",
+    "expected_keywords": [
+      "AutoML",
+      "MLOps",
+      "automation",
+      "deployment",
+      "monitoring"
+    ]
+  },
+  {
+    "question": "Explain the importance of explainable AI and discuss LIME and SHAP.",
+    "expected_keywords": [
+      "LIME",
+      "SHAP",
+      "interpretability",
+      "explainability",
+      "Shapley"
+    ]
+  },
+  {
+    "question": "Describe the historical development of neural networks.",
+    "expected_keywords": [
+      "McCulloch",
+      "Pitts",
+      "Perceptron",
+      "Rosenblatt",
+      "backpropagation"
+    ]
+  },
+  {
+    "question": "Explain the vanishing gradient problem and its solutions.",
+    "expected_keywords": [
+      "vanishing gradient",
+      "ReLU",
+      "ResNet",
+      "Batch Normalization",
+      "skip connections"
+    ]
+  },
+  {
+    "question": "Compare CNNs and RNNs.",
+    "expected_keywords": [
+      "CNN",
+      "RNN",
+      "images",
+      "sequence",
+      "LSTM"
+    ]
+  },
+  {
+    "question": "Explain how LSTMs solve the limitations of traditional RNNs.",
+    "expected_keywords": [
+      "LSTM",
+      "forget gate",
+      "input gate",
+      "output gate",
+      "long-term memory"
+    ]
+  },
+  {
+    "question": "Describe the attention mechanism and why it became important.",
+    "expected_keywords": [
+      "attention",
+      "Bahdanau",
+      "alignment",
+      "translation",
+      "weights"
+    ]
+  },
+  {
+    "question": "Explain the Transformer architecture and its major components.",
+    "expected_keywords": [
+      "Transformer",
+      "self-attention",
+      "encoder",
+      "decoder",
+      "positional encoding"
+    ]
+  },
+  {
+    "question": "Compare GANs, VAEs and Diffusion Models.",
+    "expected_keywords": [
+      "GAN",
+      "VAE",
+      "Diffusion",
+      "generator",
+      "latent"
+    ]
+  },
+  {
+    "question": "Explain Graph Neural Networks and mention a major real-world application.",
+    "expected_keywords": [
+      "GNN",
+      "graph",
+      "nodes",
+      "edges",
+      "AlphaFold"
+    ]
+  },
+  {
+    "question": "Describe the role of GPUs and TPUs in deep learning.",
+    "expected_keywords": [
+      "GPU",
+      "TPU",
+      "NVIDIA",
+      "Google",
+      "parallel"
+    ]
+  },
+  {
+    "question": "Discuss the major applications of deep learning in science.",
+    "expected_keywords": [
+      "AlphaFold",
+      "drug discovery",
+      "climate",
+      "protein",
+      "GraphCast"
+    ]
+  },
+  {
+    "question": "What are the major limitations of deep learning?",
+    "expected_keywords": [
+      "data",
+      "adversarial",
+      "overfitting",
+      "few-shot",
+      "robustness"
+    ]
+  },
+  {
+    "question": "Explain the evolution of the GPT series from GPT-1 to GPT-3.",
+    "expected_keywords": [
+      "GPT-1",
+      "GPT-2",
+      "GPT-3",
+      "OpenAI",
+      "175 billion"
+    ]
+  },
+  {
+    "question": "Explain the software crisis and mention the lessons learned from the IBM OS/360 project.",
+    "expected_keywords": [
+      "software crisis",
+      "IBM OS/360",
+      "Fred Brooks",
+      "Brooks Law",
+      "The Mythical Man-Month"
+    ]
+  },
+  {
+    "question": "Compare the Waterfall model and Agile methodology.",
+    "expected_keywords": [
+      "Waterfall",
+      "Winston Royce",
+      "Agile",
+      "Agile Manifesto",
+      "responding to change"
+    ]
+  },
+  {
+    "question": "Describe the Scrum framework including its roles and ceremonies.",
+    "expected_keywords": [
+      "Scrum",
+      "Product Owner",
+      "Scrum Master",
+      "Sprint",
+      "Retrospective"
+    ]
+  },
+  {
+    "question": "How does Kanban differ from Scrum and what are its key principles?",
+    "expected_keywords": [
+      "Kanban",
+      "Toyota",
+      "WIP",
+      "continuous flow",
+      "David Anderson"
+    ]
+  },
+  {
+    "question": "Explain the concept of design patterns and give examples from different categories.",
+    "expected_keywords": [
+      "Gang of Four",
+      "Singleton",
+      "Factory Method",
+      "Observer",
+      "Decorator"
+    ]
+  },
+  {
+    "question": "Describe microservices architecture and discuss its major benefits.",
+    "expected_keywords": [
+      "microservices",
+      "independent deployment",
+      "API",
+      "Netflix",
+      "scalability"
+    ]
+  },
+  {
+    "question": "Explain DevOps and the role of CI/CD in modern software development.",
+    "expected_keywords": [
+      "DevOps",
+      "Continuous Integration",
+      "Continuous Delivery",
+      "Continuous Deployment",
+      "DORA"
+    ]
+  },
+  {
+    "question": "Describe the Test-Driven Development cycle and its advantages.",
+    "expected_keywords": [
+      "TDD",
+      "Red",
+      "Green",
+      "Refactor",
+      "Kent Beck"
+    ]
+  },
+  {
+    "question": "Explain Git's architecture and why it became the dominant version control system.",
+    "expected_keywords": [
+      "Git",
+      "Linus Torvalds",
+      "distributed",
+      "SHA-1",
+      "GitHub"
+    ]
+  },
+  {
+    "question": "Discuss the major challenges introduced by microservices architecture.",
+    "expected_keywords": [
+      "distributed systems",
+      "network latency",
+      "service discovery",
+      "observability",
+      "saga pattern"
+    ]
+  },
+  {
+    "question": "Explain the evolution of database systems from IDS to the relational model.",
+    "expected_keywords": [
+      "IDS",
+      "Charles Bachman",
+      "CODASYL",
+      "IMS",
+      "Edgar Codd"
+    ]
+  },
+  {
+    "question": "Describe the relational model and discuss its key principles.",
+    "expected_keywords": [
+      "Edgar Codd",
+      "tables",
+      "tuples",
+      "attributes",
+      "primary key"
+    ]
+  },
+  {
+    "question": "Explain SQL and describe its major sublanguages.",
+    "expected_keywords": [
+      "SQL",
+      "SEQUEL",
+      "DDL",
+      "DML",
+      "DQL"
+    ]
+  },
+  {
+    "question": "Describe the ACID properties and explain their importance in database transactions.",
+    "expected_keywords": [
+      "Atomicity",
+      "Consistency",
+      "Isolation",
+      "Durability",
+      "transaction"
+    ]
+  },
+  {
+    "question": "Compare pessimistic concurrency control, optimistic concurrency control, and MVCC.",
+    "expected_keywords": [
+      "locking",
+      "optimistic concurrency",
+      "MVCC",
+      "serializability",
+      "transactions"
+    ]
+  },
+  {
+    "question": "Explain how B+ trees improve database performance and compare them with hash indexes.",
+    "expected_keywords": [
+      "B+ tree",
+      "index",
+      "hash index",
+      "logarithmic",
+      "range queries"
+    ]
+  },
+  {
+    "question": "Compare relational databases and NoSQL databases.",
+    "expected_keywords": [
+      "NoSQL",
+      "relational",
+      "horizontal scalability",
+      "flexible schema",
+      "ACID"
+    ]
+  },
+  {
+    "question": "Explain the CAP theorem and discuss the trade-offs in distributed databases.",
+    "expected_keywords": [
+      "CAP theorem",
+      "Consistency",
+      "Availability",
+      "Partition Tolerance",
+      "Eric Brewer"
+    ]
+  },
+  {
+    "question": "Compare OLTP and OLAP systems and explain why columnar storage is useful for analytics.",
+    "expected_keywords": [
+      "OLTP",
+      "OLAP",
+      "columnar",
+      "analytics",
+      "data warehouse"
+    ]
+  },
+  {
+    "question": "Explain the Lakehouse architecture and how it differs from traditional data warehouses and data lakes.",
+    "expected_keywords": [
+      "Lakehouse",
+      "Delta Lake",
+      "data lake",
+      "data warehouse",
+      "ACID"
+    ]
+  },
+  {
+    "question": "Explain the CIA triad and discuss its importance in cybersecurity.",
+    "expected_keywords": [
+      "Confidentiality",
+      "Integrity",
+      "Availability",
+      "CIA triad",
+      "security"
+    ]
+  },
+  {
+    "question": "Describe the Morris Worm attack and explain its significance in cybersecurity history.",
+    "expected_keywords": [
+      "Morris Worm",
+      "Robert Morris",
+      "1988",
+      "CFAA",
+      "worm"
+    ]
+  },
+  {
+    "question": "Compare viruses, worms, trojans, ransomware, and spyware.",
+    "expected_keywords": [
+      "virus",
+      "worm",
+      "trojan",
+      "ransomware",
+      "spyware"
+    ]
+  },
+  {
+    "question": "Explain the WannaCry and NotPetya attacks and discuss their impact.",
+    "expected_keywords": [
+      "WannaCry",
+      "NotPetya",
+      "EternalBlue",
+      "Shadow Brokers",
+      "damages"
+    ]
+  },
+  {
+    "question": "Describe phishing and its different forms of social engineering attacks.",
+    "expected_keywords": [
+      "phishing",
+      "spear phishing",
+      "whaling",
+      "vishing",
+      "smishing"
+    ]
+  },
+  {
+    "question": "Explain Zero Trust Architecture and compare it with traditional perimeter security.",
+    "expected_keywords": [
+      "Zero Trust",
+      "John Kindervag",
+      "never trust",
+      "always verify",
+      "BeyondCorp"
+    ]
+  },
+  {
+    "question": "Describe Public Key Infrastructure (PKI) and explain how HTTPS works.",
+    "expected_keywords": [
+      "PKI",
+      "certificate",
+      "X.509",
+      "HTTPS",
+      "Certificate Authority"
+    ]
+  },
+  {
+    "question": "Explain vulnerability management and discuss the significance of CVE and CVSS.",
+    "expected_keywords": [
+      "CVE",
+      "CVSS",
+      "MITRE",
+      "NVD",
+      "vulnerability"
+    ]
+  },
+  {
+    "question": "Describe Multi-Factor Authentication and explain how FIDO2 improves authentication security.",
+    "expected_keywords": [
+      "MFA",
+      "FIDO2",
+      "WebAuthn",
+      "passkeys",
+      "authentication"
+    ]
+  },
+  {
+    "question": "Explain the ransomware attack lifecycle and discuss the role of Ransomware-as-a-Service.",
+    "expected_keywords": [
+      "ransomware",
+      "RaaS",
+      "lateral movement",
+      "exfiltration",
+      "encryption"
+    ]
+  },
+  {
+    "question": "Explain the contributions of Claude Shannon, Paul Baran, and Donald Davies to the foundations of computer networking.",
+    "expected_keywords": [
+      "Claude Shannon",
+      "information theory",
+      "Paul Baran",
+      "packet switching",
+      "Donald Davies"
+    ]
+  },
+  {
+    "question": "Compare the OSI model and the TCP/IP model, including their layers and purposes.",
+    "expected_keywords": [
+      "OSI",
+      "TCP/IP",
+      "7 layers",
+      "4 layers",
+      "ISO"
+    ]
+  },
+  {
+    "question": "Describe IPv4 and IPv6 and explain why IPv6 was introduced.",
+    "expected_keywords": [
+      "IPv4",
+      "32-bit",
+      "IPv6",
+      "128-bit",
+      "address exhaustion"
+    ]
+  },
+  {
+    "question": "Explain how TCP ensures reliable communication and discuss the TCP three-way handshake.",
+    "expected_keywords": [
+      "TCP",
+      "sequence numbers",
+      "acknowledgments",
+      "SYN",
+      "SYN-ACK"
+    ]
+  },
+  {
+    "question": "Describe Van Jacobson's TCP congestion control algorithms and their impact on the Internet.",
+    "expected_keywords": [
+      "Van Jacobson",
+      "slow start",
+      "congestion avoidance",
+      "fast retransmit",
+      "fast recovery"
+    ]
+  },
+  {
+    "question": "Explain the history of ARPANET and discuss its role in the development of the modern Internet.",
+    "expected_keywords": [
+      "ARPANET",
+      "1969",
+      "UCLA",
+      "TCP/IP",
+      "Flag Day"
+    ]
+  },
+  {
+    "question": "Describe how DNS works and explain the roles of ICANN, recursive resolvers, and authoritative name servers.",
+    "expected_keywords": [
+      "DNS",
+      "ICANN",
+      "recursive resolver",
+      "authoritative name server",
+      "domain names"
+    ]
+  },
+  {
+    "question": "Compare the evolution of Wi-Fi technologies from 802.11 to Wi-Fi 6 and discuss key improvements.",
+    "expected_keywords": [
+      "802.11",
+      "Wi-Fi 4",
+      "Wi-Fi 5",
+      "Wi-Fi 6",
+      "OFDMA"
+    ]
+  },
+  {
+    "question": "Explain TLS 1.3 and discuss how it improves security and performance compared to earlier versions.",
+    "expected_keywords": [
+      "TLS 1.3",
+      "HTTPS",
+      "forward secrecy",
+      "handshake",
+      "encryption"
+    ]
+  },
+  {
+    "question": "Describe Software-Defined Networking (SDN) and explain how it differs from traditional networking.",
+    "expected_keywords": [
+      "SDN",
+      "control plane",
+      "data plane",
+      "OpenFlow",
+      "centralized control"
+    ]
+  },
+  {
+    "question": "Describe the evolution of operating systems from first-generation computers to modern time-sharing systems.",
+    "expected_keywords": [
+      "ENIAC",
+      "UNIVAC",
+      "batch processing",
+      "multiprogramming",
+      "time-sharing"
+    ]
+  },
+  {
+    "question": "Compare FCFS, SJF, Round Robin, and Completely Fair Scheduler in process scheduling.",
+    "expected_keywords": [
+      "FCFS",
+      "Shortest Job First",
+      "Round Robin",
+      "CFS",
+      "Linux"
+    ]
+  },
+  {
+    "question": "Explain virtual memory and discuss the major page replacement algorithms.",
+    "expected_keywords": [
+      "virtual memory",
+      "MMU",
+      "page fault",
+      "LRU",
+      "FIFO"
+    ]
+  },
+  {
+    "question": "Describe the Belady Anomaly and explain why it influenced page replacement algorithm design.",
+    "expected_keywords": [
+      "Belady",
+      "FIFO",
+      "page faults",
+      "LRU",
+      "memory management"
+    ]
+  },
+  {
+    "question": "Compare FAT, NTFS, ext4, APFS, and ZFS file systems.",
+    "expected_keywords": [
+      "FAT",
+      "NTFS",
+      "ext4",
+      "APFS",
+      "ZFS"
+    ]
+  },
+  {
+    "question": "Explain the history of UNIX and discuss how Linux evolved from it.",
+    "expected_keywords": [
+      "Ken Thompson",
+      "Dennis Ritchie",
+      "UNIX",
+      "Linus Torvalds",
+      "GNU"
+    ]
+  },
+  {
+    "question": "Describe the development of Microsoft Windows from MS-DOS to Windows NT.",
+    "expected_keywords": [
+      "MS-DOS",
+      "QDOS",
+      "Windows 95",
+      "Windows NT",
+      "David Cutler"
+    ]
+  },
+  {
+    "question": "Explain concurrency and synchronization, including semaphores and deadlocks.",
+    "expected_keywords": [
+      "critical section",
+      "semaphore",
+      "Dijkstra",
+      "deadlock",
+      "Coffman"
+    ]
+  },
+  {
+    "question": "Compare virtualization and containers, including Docker and Kubernetes.",
+    "expected_keywords": [
+      "hypervisor",
+      "virtual machines",
+      "Docker",
+      "containers",
+      "Kubernetes"
+    ]
+  },
+  {
+    "question": "Explain operating system security mechanisms and discuss the principle of least privilege.",
+    "expected_keywords": [
+      "access control",
+      "SELinux",
+      "ACL",
+      "least privilege",
+      "reference monitor"
+    ]
+  },
+  {
+    "question": "Explain the contributions of Alan Turing, Alonzo Church, and John von Neumann to the foundations of Computer Science.",
+    "expected_keywords": [
+      "Alan Turing",
+      "Turing machine",
+      "Alonzo Church",
+      "lambda calculus",
+      "von Neumann architecture"
+    ]
+  },
+  {
+    "question": "Compare arrays, linked lists, hash tables, and binary search trees in terms of structure and efficiency.",
+    "expected_keywords": [
+      "arrays",
+      "linked lists",
+      "hash tables",
+      "binary search trees",
+      "O(1)"
+    ]
+  },
+  {
+    "question": "Compare Merge Sort, Quick Sort, and Timsort, including their time complexities and advantages.",
+    "expected_keywords": [
+      "Merge Sort",
+      "Quick Sort",
+      "Timsort",
+      "O(n log n)",
+      "divide and conquer"
+    ]
+  },
+  {
+    "question": "Explain Big-O notation and discuss its role in algorithm analysis.",
+    "expected_keywords": [
+      "Big-O",
+      "time complexity",
+      "space complexity",
+      "Donald Knuth",
+      "asymptotic"
+    ]
+  },
+  {
+    "question": "Describe the P versus NP problem and explain the significance of NP-complete problems.",
+    "expected_keywords": [
+      "P",
+      "NP",
+      "NP-complete",
+      "Stephen Cook",
+      "SAT"
+    ]
+  },
+  {
+    "question": "Compare procedural programming, object-oriented programming, and functional programming.",
+    "expected_keywords": [
+      "procedural",
+      "object-oriented",
+      "functional",
+      "encapsulation",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "Explain the major performance techniques used in modern CPU architecture.",
+    "expected_keywords": [
+      "pipelining",
+      "superscalar",
+      "out-of-order execution",
+      "branch prediction",
+      "cache"
+    ]
+  },
+  {
+    "question": "Describe the historical development of computer graphics and discuss the importance of Sketchpad and Pixar.",
+    "expected_keywords": [
+      "Ivan Sutherland",
+      "Sketchpad",
+      "computer graphics",
+      "Pixar",
+      "RenderMan"
+    ]
+  },
+  {
+    "question": "Explain the evolution of human-computer interaction from command-line interfaces to modern graphical interfaces.",
+    "expected_keywords": [
+      "Douglas Engelbart",
+      "mouse",
+      "Xerox Alto",
+      "GUI",
+      "Macintosh"
+    ]
+  },
+  {
+    "question": "Compare classical cryptography and modern cryptography, including DES, AES, and RSA.",
+    "expected_keywords": [
+      "DES",
+      "AES",
+      "RSA",
+      "Diffie-Hellman",
+      "public-key cryptography"
+    ]
+  },
+  {
+    "question": "Explain the motivation behind Retrieval-Augmented Generation and discuss how it addresses the limitations of traditional LLMs.",
+    "expected_keywords": [
+      "hallucination",
+      "external knowledge",
+      "retrieval",
+      "factual accuracy",
+      "training cutoff"
+    ]
+  },
+  {
+    "question": "Describe the original RAG architecture proposed by Facebook AI Research and identify its major components.",
+    "expected_keywords": [
+      "Patrick Lewis",
+      "DPR",
+      "BART",
+      "Wikipedia",
+      "retriever"
+    ]
+  },
+  {
+    "question": "Compare sparse retrieval, dense retrieval, and hybrid retrieval approaches.",
+    "expected_keywords": [
+      "BM25",
+      "DPR",
+      "embeddings",
+      "hybrid",
+      "RRF"
+    ]
+  },
+  {
+    "question": "Explain how embedding models evolved from Word2Vec and GloVe to Sentence-BERT and modern embedding systems.",
+    "expected_keywords": [
+      "Word2Vec",
+      "GloVe",
+      "Sentence-BERT",
+      "MTEB",
+      "cosine similarity"
+    ]
+  },
+  {
+    "question": "Describe vector databases and discuss the major ANN algorithms used in modern RAG systems.",
+    "expected_keywords": [
+      "FAISS",
+      "HNSW",
+      "ScaNN",
+      "ANN",
+      "vector database"
+    ]
+  },
+  {
+    "question": "Compare different chunking strategies and explain the trade-offs between chunk size and retrieval quality.",
+    "expected_keywords": [
+      "fixed-size",
+      "sentence-based",
+      "semantic chunking",
+      "agentic chunking",
+      "late chunking"
+    ]
+  },
+  {
+    "question": "Explain advanced retrieval methods such as HyDE, Multi-Query Retrieval, and Parent-Child Retrieval.",
+    "expected_keywords": [
+      "HyDE",
+      "multi-query",
+      "parent-child",
+      "hypothetical document",
+      "retrieval"
+    ]
+  },
+  {
+    "question": "Compare Naive RAG, Self-RAG, FLARE, RAPTOR, and RAG-Fusion architectures.",
+    "expected_keywords": [
+      "Self-RAG",
+      "FLARE",
+      "RAPTOR",
+      "RAG-Fusion",
+      "iterative retrieval"
+    ]
+  },
+  {
+    "question": "Explain the major evaluation metrics used for RAG systems and discuss the role of RAGAS.",
+    "expected_keywords": [
+      "Recall@k",
+      "Precision@k",
+      "MRR",
+      "RAGAS",
+      "faithfulness"
+    ]
+  },
+  {
+    "question": "Compare RAG and fine-tuning and explain when each approach is most appropriate.",
+    "expected_keywords": [
+      "fine-tuning",
+      "RAG",
+      "knowledge base",
+      "factual grounding",
+      "knowledge-intensive"
+    ]
+  },
+  {
+    "question": "Explain the evolution of the GPT series from GPT-1 to GPT-4 and discuss the major improvements introduced at each stage.",
+    "expected_keywords": [
+      "GPT-1",
+      "GPT-2",
+      "GPT-3",
+      "GPT-4",
+      "multimodal"
+    ]
+  },
+  {
+    "question": "Compare GPT and BERT architectures, including their training objectives and key differences.",
+    "expected_keywords": [
+      "GPT",
+      "BERT",
+      "causal language model",
+      "masked language model",
+      "bidirectional"
+    ]
+  },
+  {
+    "question": "Explain the Scaling Laws and discuss how the Chinchilla paper revised earlier assumptions.",
+    "expected_keywords": [
+      "Scaling Laws",
+      "Jared Kaplan",
+      "Chinchilla",
+      "DeepMind",
+      "training tokens"
+    ]
+  },
+  {
+    "question": "Describe RLHF and explain the three stages used to train InstructGPT.",
+    "expected_keywords": [
+      "RLHF",
+      "Supervised Fine-Tuning",
+      "Reward Model",
+      "PPO",
+      "human feedback"
+    ]
+  },
+  {
+    "question": "Explain Constitutional AI and discuss how Anthropic applies it in Claude models.",
+    "expected_keywords": [
+      "Constitutional AI",
+      "Anthropic",
+      "Claude",
+      "self critique",
+      "alignment"
+    ]
+  },
+  {
+    "question": "Discuss emergent capabilities in Large Language Models and provide examples.",
+    "expected_keywords": [
+      "emergent capabilities",
+      "chain-of-thought",
+      "reasoning",
+      "arithmetic",
+      "Jason Wei"
+    ]
+  },
+  {
+    "question": "Explain Chain-of-Thought and Tree-of-Thought prompting and compare their approaches.",
+    "expected_keywords": [
+      "Chain-of-Thought",
+      "Tree-of-Thought",
+      "reasoning",
+      "prompting",
+      "intermediate steps"
+    ]
+  },
+  {
+    "question": "Describe the rise of open-source LLMs and compare LLaMA, Mistral, and Mixtral.",
+    "expected_keywords": [
+      "LLaMA",
+      "Meta",
+      "Mistral",
+      "Mixtral",
+      "open-source"
+    ]
+  },
+  {
+    "question": "Explain hallucinations in LLMs and discuss techniques used to reduce them.",
+    "expected_keywords": [
+      "hallucination",
+      "TruthfulQA",
+      "RAG",
+      "factuality",
+      "FEVER"
+    ]
+  },
+  {
+    "question": "Describe multimodal LLMs and compare GPT-4V, Claude 3, and Gemini.",
+    "expected_keywords": [
+      "GPT-4V",
+      "Claude 3",
+      "Gemini",
+      "multimodal",
+      "vision"
+    ]
+  },
+  {
+    "question": "Explain the historical evolution of neural networks from McCulloch-Pitts neurons to deep learning.",
+    "expected_keywords": [
+      "McCulloch",
+      "Pitts",
+      "Perceptron",
+      "Rosenblatt",
+      "backpropagation"
+    ]
+  },
+  {
+    "question": "Describe the vanishing gradient problem and discuss major solutions.",
+    "expected_keywords": [
+      "vanishing gradient",
+      "ReLU",
+      "ResNet",
+      "skip connection",
+      "Batch Normalization"
+    ]
+  },
+  {
+    "question": "Compare LeNet, AlexNet, VGG, GoogLeNet, and ResNet architectures.",
+    "expected_keywords": [
+      "LeNet",
+      "AlexNet",
+      "VGG",
+      "GoogLeNet",
+      "ResNet"
+    ]
+  },
+  {
+    "question": "Explain LSTM architecture and discuss how it addresses limitations of traditional RNNs.",
+    "expected_keywords": [
+      "LSTM",
+      "RNN",
+      "forget gate",
+      "input gate",
+      "long-term memory"
+    ]
+  },
+  {
+    "question": "Describe attention mechanisms and explain why they became important in deep learning.",
+    "expected_keywords": [
+      "attention",
+      "Bahdanau",
+      "alignment",
+      "softmax",
+      "encoder-decoder"
+    ]
+  },
+  {
+    "question": "Explain the Transformer architecture and discuss its key innovations.",
+    "expected_keywords": [
+      "Transformer",
+      "self-attention",
+      "multi-head attention",
+      "positional encoding",
+      "Vaswani"
+    ]
+  },
+  {
+    "question": "Describe GANs and explain the interaction between Generator and Discriminator.",
+    "expected_keywords": [
+      "GAN",
+      "generator",
+      "discriminator",
+      "Goodfellow",
+      "minimax"
+    ]
+  },
+  {
+    "question": "Compare Autoencoders and Variational Autoencoders.",
+    "expected_keywords": [
+      "autoencoder",
+      "VAE",
+      "latent space",
+      "ELBO",
+      "KL divergence"
+    ]
+  },
+  {
+    "question": "Explain diffusion models and discuss how Stable Diffusion generates images.",
+    "expected_keywords": [
+      "diffusion",
+      "noise",
+      "denoising",
+      "DDPM",
+      "Stable Diffusion"
+    ]
+  },
+  {
+    "question": "Compare Graph Convolutional Networks and Graph Attention Networks.",
+    "expected_keywords": [
+      "GCN",
+      "GAT",
+      "graph neural network",
+      "neighbor aggregation",
+      "attention"
+    ]
+  },
+  {
+    "question": "Explain the origins of Artificial Intelligence and discuss the contributions of John McCarthy and Alan Turing.",
+    "expected_keywords": [
+      "John McCarthy",
+      "Dartmouth Conference",
+      "Alan Turing",
+      "Turing Test",
+      "1956"
+    ]
+  },
+  {
+    "question": "Describe the Turing Test and explain the Chinese Room argument against it.",
+    "expected_keywords": [
+      "Turing Test",
+      "Imitation Game",
+      "John Searle",
+      "Chinese Room",
+      "understanding"
+    ]
+  },
+  {
+    "question": "Explain the significance of the Dartmouth Conference and discuss the achievements of the Logic Theorist.",
+    "expected_keywords": [
+      "Dartmouth Conference",
+      "John McCarthy",
+      "Logic Theorist",
+      "Allen Newell",
+      "Herbert Simon"
+    ]
+  },
+  {
+    "question": "Compare Symbolic AI and Machine Learning approaches to Artificial Intelligence.",
+    "expected_keywords": [
+      "Symbolic AI",
+      "GOFAI",
+      "Machine Learning",
+      "rules",
+      "data"
+    ]
+  },
+  {
+    "question": "Explain expert systems and discuss DENDRAL, MYCIN, and XCON.",
+    "expected_keywords": [
+      "expert system",
+      "DENDRAL",
+      "MYCIN",
+      "XCON",
+      "Feigenbaum"
+    ]
+  },
+  {
+    "question": "Describe the causes and consequences of the two AI Winters.",
+    "expected_keywords": [
+      "AI winter",
+      "Lighthill",
+      "ALPAC",
+      "expert systems",
+      "funding"
+    ]
+  },
+  {
+    "question": "Explain the ImageNet revolution and discuss the significance of AlexNet.",
+    "expected_keywords": [
+      "ImageNet",
+      "AlexNet",
+      "Geoffrey Hinton",
+      "GPU",
+      "ILSVRC"
+    ]
+  },
+  {
+    "question": "Compare Narrow AI, Artificial General Intelligence, and Artificial Superintelligence.",
+    "expected_keywords": [
+      "Narrow AI",
+      "AGI",
+      "ASI",
+      "human-level",
+      "superintelligence"
+    ]
+  },
+  {
+    "question": "Discuss major ethical challenges in Artificial Intelligence and explain AI alignment.",
+    "expected_keywords": [
+      "bias",
+      "fairness",
+      "transparency",
+      "alignment",
+      "Stuart Russell"
+    ]
+  },
+  {
+    "question": "Explain how attention mechanisms led to the Transformer architecture and transformed NLP.",
+    "expected_keywords": [
+      "attention",
+      "Bahdanau",
+      "Transformer",
+      "Vaswani",
+      "NLP"
+    ]
   }
 ]

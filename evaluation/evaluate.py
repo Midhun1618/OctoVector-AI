@@ -1,33 +1,130 @@
 from __future__ import annotations
-
 import json
 import time
-import requests
+import sys
+from pathlib import Path
 
-DATASET_FILE = "test_dataset.json"
+# ==========================================================
 
-API_URL = "http://127.0.0.1:8000/query"
+# PROJECT ROOT
 
-with open(DATASET_FILE, "r", encoding="utf-8") as f:
-    dataset = json.load(f)
+# ==========================================================
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(ROOT_DIR))
+
+# ==========================================================
+
+# IMPORTS
+
+# ==========================================================
+
+from pipelines.ingestion_pipeline import process_pdf
+from embedding.embedder import embed_chunks
+from pipelines.retrieval_pipeline import retrieve_chunks
+from indexing.index_manager import IndexManager
+
+# ==========================================================
+
+# CONFIG
+
+# ==========================================================
+
+PDF_PATH = "../uploads/heavy_content.pdf"
+DATASET_FILE = "dataset.json"
+
+TOP_K = 5
+
+# ==========================================================
+
+# LOAD DATASET
+
+# ==========================================================
+
+with open(DATASET_FILE, "r", encoding="utf-8") as f:dataset = json.load(f)
 
 print(f"\n🟢 Loaded {len(dataset)} evaluation samples")
+
+# ==========================================================
+
+# PDF INGESTION
+
+# ==========================================================
+
+print("\n============================================================")
+print(" PDF INGESTION ")
+print("============================================================")
+
+chunks = process_pdf(PDF_PATH)
+
+print(f"\n🟢 Chunks created: {len(chunks)}")
+
+# ==========================================================
+
+# EMBEDDINGS
+
+# ==========================================================
+
+print("\n============================================================")
+print(" EMBEDDING ")
+print("============================================================")
+
+embeddings = embed_chunks(chunks)
+
+print(
+f"\n🟢 Embedding Shape: "
+f"{embeddings.shape}"
+)
+
+# ==========================================================
+
+# BUILD INDEX ONCE
+
+# ==========================================================
+
+print("\n============================================================")
+print(" BUILDING INDEX ")
+print("============================================================")
+
+index_manager = IndexManager()
+
+index_manager.build_index(
+chunks=chunks,
+embeddings=embeddings
+)
+
+print("\n🟢 Index Built Successfully")
+
+# ==========================================================
+
+# METRICS
+
+# ==========================================================
 
 total_questions = len(dataset)
 
 successful_retrievals = 0
 
-total_precision = 0.0
 total_recall = 0.0
 
 total_time = 0.0
 
+# ==========================================================
+
+# EVALUATION LOOP
+
+# ==========================================================
+
 for idx, sample in enumerate(dataset, start=1):
 
     question = sample["question"]
-    expected_keywords = sample["expected_keywords"]
 
-    print("\n" + "=" * 60)
+    expected_keywords = sample[
+        "expected_keywords"
+    ]
+
+    print("\n")
+    print("=" * 60)
     print(f"QUESTION {idx}")
     print("=" * 60)
 
@@ -35,59 +132,168 @@ for idx, sample in enumerate(dataset, start=1):
 
     start = time.time()
 
-    response = requests.post(
-        API_URL,
-        json={"question": question},
-        timeout=120
+    retrieved_chunks = retrieve_chunks(
+        query=question,
+        chunks=chunks,
+        embeddings=embeddings,
+        top_k=TOP_K,
+        index_manager=index_manager
     )
 
-    end = time.time()
+    retrieval_time = (
+        time.time() - start
+    )
 
-    query_time = end - start
-    total_time += query_time
+    total_time += retrieval_time
 
-    predicted_answer = response.json()["answer"]
-
-    print("\nANSWER:")
-    print(predicted_answer)
-
-    answer_lower = predicted_answer.lower()
+    retrieved_text = " ".join(
+        chunk["text"]
+        for chunk in retrieved_chunks
+    ).lower()
 
     matched_keywords = []
 
     for keyword in expected_keywords:
 
-        if keyword.lower() in answer_lower:
-            matched_keywords.append(keyword)
+        if keyword.lower() in retrieved_text:
 
-    recall = len(matched_keywords) / len(expected_keywords)
+            matched_keywords.append(
+                keyword
+            )
 
-    answer_words = set(
-        predicted_answer.lower().split()
-    )
-
-    keyword_words = set(
-        k.lower()
-        for k in expected_keywords
-    )
-
-    precision = (
-        len(keyword_words.intersection(answer_words))
-        / max(len(answer_words), 1)
+    recall = (
+        len(matched_keywords)
+        / len(expected_keywords)
     )
 
     total_recall += recall
-    total_precision += precision
 
-    if recall > 0:
+    if len(matched_keywords) > 0:
         successful_retrievals += 1
 
-    print(f"\nExpected Keywords : {expected_keywords}")
-    print(f"Matched Keywords  : {matched_keywords}")
+    print(
+        f"\nExpected Keywords : "
+        f"{expected_keywords}"
+    )
 
-    print(f"Recall            : {recall:.3f}")
-    print(f"Precision         : {precision:.3f}")
-    print(f"Query Time        : {query_time:.2f}s")
+    print(
+        f"Matched Keywords  : "
+        f"{matched_keywords}"
+    )
+
+    print(
+        f"Keyword Hits      : "
+        f"{len(matched_keywords)}"
+        f"/"
+        f"{len(expected_keywords)}"
+    )
+
+    print(
+        f"Recall            : "
+        f"{recall:.3f}"
+    )
+
+    print(
+        f"Retrieval Time    : "
+        f"{retrieval_time:.2f}s"
+    )
+
+print("\n")
+print("=" * 60)
+print(f"QUESTION {idx}")
+print("=" * 60)
+
+print(f"\nQ: {question}")
+
+start = time.time()
+
+retrieved_chunks = retrieve_chunks(
+    query=question,
+    chunks=chunks,
+    embeddings=embeddings,
+    top_k=TOP_K,
+    index_manager=index_manager
+)
+
+retrieval_time = (
+    time.time() - start
+)
+
+total_time += retrieval_time
+
+# ======================================================
+# MERGE RETRIEVED CHUNKS
+# ======================================================
+
+retrieved_text = " ".join(
+    chunk["text"]
+    for chunk in retrieved_chunks
+).lower()
+
+# ======================================================
+# KEYWORD MATCHING
+# ======================================================
+
+matched_keywords = []
+
+for keyword in expected_keywords:
+
+    if keyword.lower() in retrieved_text:
+
+        matched_keywords.append(
+            keyword
+        )
+
+# ======================================================
+# RECALL
+# ======================================================
+
+recall = (
+    len(matched_keywords)
+    / len(expected_keywords)
+)
+
+total_recall += recall
+
+if len(matched_keywords) > 0:
+    successful_retrievals += 1
+
+# ======================================================
+# OUTPUT
+# ======================================================
+
+print(
+    f"\nExpected Keywords : "
+    f"{expected_keywords}"
+)
+
+print(
+    f"Matched Keywords  : "
+    f"{matched_keywords}"
+)
+
+print(
+    f"Keyword Hits      : "
+    f"{len(matched_keywords)}"
+    f"/"
+    f"{len(expected_keywords)}"
+)
+
+print(
+    f"Recall            : "
+    f"{recall:.3f}"
+)
+
+print(
+    f"Retrieval Time    : "
+    f"{retrieval_time:.2f}s"
+)
+
+# ==========================================================
+
+# FINAL RESULTS
+
+# ==========================================================
 
 print("\n")
 print("=" * 60)
@@ -95,39 +301,44 @@ print("FINAL RESULTS")
 print("=" * 60)
 
 success_rate = (
-    successful_retrievals / total_questions
+successful_retrievals
+/ total_questions
 ) * 100
 
 avg_recall = (
-    total_recall / total_questions
-)
-
-avg_precision = (
-    total_precision / total_questions
+total_recall
+/ total_questions
 )
 
 avg_time = (
-    total_time / total_questions
+total_time
+/ total_questions
 )
-
-print(f"\nQuestions Tested      : {total_questions}")
+print("\nDEBUG")
+print("successful_retrievals =", successful_retrievals)
+print("total_recall =", total_recall)
+print("total_questions =", total_questions)
 
 print(
-    f"Retrieval Success Rate: "
-    f"{success_rate:.2f}%"
-)
-
-print(
-    f"Average Recall        : "
-    f"{avg_recall:.4f}"
+f"\nQuestions Tested      : "
+f"{total_questions}"
 )
 
 print(
-    f"Average Precision     : "
-    f"{avg_precision:.4f}"
+f"Retrieval Success Rate: "
+f"{success_rate:.2f}%"
 )
 
 print(
-    f"Average Query Time    : "
-    f"{avg_time:.2f}s"
+f"Average Recall        : "
+f"{avg_recall:.4f}"
 )
+
+print(
+f"Average Retrieval Time: "
+f"{avg_time:.2f}s"
+)
+
+print("\n============================================================")
+print("EVALUATION COMPLETE")
+print("============================================================")
