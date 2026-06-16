@@ -20,6 +20,20 @@ The system focuses on one principle:
 
 ---
 
+# 📊 Evaluation Results
+
+> Retrieval was evaluated **independently** on the retrieval layer — measuring retrieval quality directly, without relying on LLM-generated answers.
+
+| Metric | Result |
+|--------|--------|
+| Evaluation Questions | 136 |
+| Knowledge Base Size | 1,197 chunks |
+| Retrieval Success (Hit@5) | **98.53%** |
+| Average Recall | **84.41%** |
+| Failed Retrievals | 2 / 136 |
+| Average Query Latency | **1.15 seconds** |
+
+---
 # Features
 
 ### Document Intelligence
